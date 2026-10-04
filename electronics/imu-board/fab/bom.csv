@@ -1,0 +1,4 @@
+Comment,Designator,Footprint,LCSC Part #
+100nF,"C1,C2",C_0402_1005Metric,C1525
+BM04B-SRSS-TB I2C in,J1,JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical,C160390
+LSM6DSV16X,U1,LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y,C5267406

@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Servo Bus</title>
+<style>
+:root{--bg:#f5f4f0;--card:#fff;--fg:#1b1c1e;--mut:#6b6f75;--line:#e2e0da;--ok:#1f8a4c;--warn:#b7791f;--bad:#c62828;--badbg:#fdecea;--warnbg:#fff6e0;--accent:#2457c5;--chip:#eeede8;--spark:#2457c5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121315;--card:#1c1d20;--fg:#ececec;--mut:#9a9ea5;--line:#2c2e33;--ok:#4cc27e;--warn:#e3a943;--bad:#ff6b6b;--badbg:#3a1c1c;--warnbg:#36301c;--accent:#7aa2ff;--chip:#26282c;--spark:#7aa2ff}}
+:root[data-theme="dark"]{--bg:#121315;--card:#1c1d20;--fg:#ececec;--mut:#9a9ea5;--line:#2c2e33;--ok:#4cc27e;--warn:#e3a943;--bad:#ff6b6b;--badbg:#3a1c1c;--warnbg:#36301c;--accent:#7aa2ff;--chip:#26282c;--spark:#7aa2ff}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:1180px;margin:0 auto;padding:12px 16px 40px}
+header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:4px 0 12px}
+h1{font-size:20px;margin:0;font-weight:650;letter-spacing:-.01em}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;background:var(--chip);font-size:13px;color:var(--mut)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--mut);flex:none}
+.dot.ok{background:var(--ok)}.dot.warn{background:var(--warn)}.dot.bad{background:var(--bad)}
+.grow{flex:1}
+button{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:10px;padding:8px 12px;cursor:pointer;min-height:38px}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button.danger{color:var(--bad)}
+button:disabled{opacity:.45;cursor:default}
+.banner{border-radius:12px;padding:12px 14px;margin:0 0 10px;font-weight:600}
+.banner small{display:block;font-weight:400;opacity:.85;margin-top:2px}
+.banner.bad{background:var(--badbg);color:var(--bad);border:1px solid var(--bad)}
+.banner.warn{background:var(--warnbg);color:var(--warn);border:1px solid var(--warn)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;transition:opacity .2s}
+.card.stale{opacity:.5}
+.card.dup{border:2px solid var(--bad)}
+.card.weak{border-color:var(--warn)}
+.top{display:flex;align-items:center;gap:8px}
+.name{font-weight:650;font-size:16px}
+.id{font:600 13px ui-monospace,Menlo,monospace;background:var(--chip);padding:2px 7px;border-radius:6px}
+.state{font-size:13px;color:var(--mut);margin:2px 0 6px;min-height:18px}
+.state.bad{color:var(--bad);font-weight:600}.state.warn{color:var(--warn)}
+.angle{display:flex;align-items:flex-end;gap:10px}
+.deg{font:600 28px/1 ui-monospace,Menlo,monospace;min-width:110px}
+.deg small{font-size:13px;color:var(--mut);font-weight:400}
+canvas.spark{flex:1;height:44px;width:100%;display:block}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 10px;margin-top:8px;font-size:13px}
+.stats div{display:flex;flex-direction:column}
+.stats b{font:600 14px ui-monospace,Menlo,monospace}
+.stats span{color:var(--mut);font-size:11.5px}
+.acts{display:flex;gap:8px;margin-top:10px}
+.ctl{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+.ctl[hidden]{display:none}
+.ctl .row2{display:flex;gap:8px;align-items:center}
+.ctl input[type=range]{flex:1;min-height:38px}
+.ctl .tgt{font-variant-numeric:tabular-nums;min-width:7ch;text-align:right}
+button.on{background:var(--warn);border-color:var(--warn);color:#000}
+.acts button{flex:1}
+section{margin-top:22px}
+h2{font-size:15px;margin:0 0 8px;color:var(--mut);font-weight:600}
+.ev{font-size:13px;display:grid;grid-template-columns:70px 1fr;gap:2px 10px}
+.ev .t{color:var(--mut);font-family:ui-monospace,Menlo,monospace}
+.ev .duplicate,.ev .refused,.ev .stall{color:var(--bad)}.ev .setid,.ev .recover{color:var(--ok)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+td,th{text-align:left;padding:5px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-weight:600}
+.empty{color:var(--mut);padding:24px;text-align:center;border:1px dashed var(--line);border-radius:14px}
+dialog{border:none;border-radius:16px;padding:0;background:var(--card);color:var(--fg);width:min(440px,calc(100vw - 32px));box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(0,0,0,.4)}
+.dlg{padding:16px}
+.dlg h3{margin:0 0 4px;font-size:17px}
+.dlg label{display:block;font-size:13px;color:var(--mut);margin:12px 0 4px}
+.dlg select,.dlg input{width:100%;font:inherit;padding:9px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
+.warns{margin:12px 0 0;padding:0;list-style:none;font-size:13.5px}
+.warns li{padding:7px 10px;border-radius:8px;margin-bottom:6px;background:var(--badbg);color:var(--bad)}
+.warns li.okk{background:transparent;color:var(--ok);padding-left:0}
+.row{display:flex;gap:8px;margin-top:14px}
+.row button{flex:1}
+.result{margin-top:12px;font-size:13.5px;padding:10px;border-radius:10px;background:var(--chip)}
+.busy{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:99px;font-weight:600;display:none}
+.lim{margin-top:10px;padding-top:8px;border-top:1px solid var(--line);font-size:13px}
+.limtxt.ok{color:var(--ok)}.limtxt.warn{color:var(--warn)}.limtxt.bad{color:var(--bad);font-weight:600}
+.limrec{color:var(--mut);margin:2px 0 6px}
+.lim .row2{display:flex;gap:8px}.lim .row2 button{flex:1}
+.walkrow { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.walkrow input { width: 4.5em; }
+.wtail { font-size: 12px; max-height: 8.5em; overflow: auto; white-space: pre-wrap; margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>Servo bus</h1>
+  <span class="pill" id="live"><span class="dot" id="livedot"></span><span id="livetxt">connecting</span></span>
+  <span class="grow"></span>
+  <button class="danger" id="alloff" title="Turn the holding torque off on every servo on the bus">All torque off</button>
+</header>
+<div id="banners"></div>
+<section id="walk" hidden>
+  <h2>Walk: the neural network on the legs</h2>
+  <div class="walkrow">
+    <label>Motion <input id="wamp" type="number" min="1" max="25" step="1" value="5"> %</label>
+    <label>Torque <input id="wcap" type="number" min="1" max="30" step="1" value="5"> %</label>
+    <button id="wstart">Start</button>
+    <button class="danger" id="wstop">Stop</button>
+    <span id="wstate" class="muted"></span>
+  </div>
+  <pre id="wtail" class="wtail"></pre>
+</section>
+<div id="grid" class="grid"></div>
+<section>
+  <h2>What happened</h2>
+  <div class="ev" id="events"></div>
+</section>
+<section>
+  <h2>ID registry: every ID given to a servo</h2>
+  <table><thead><tr><th>ID</th><th>Joint</th><th>Since</th><th>Now</th></tr></thead><tbody id="reg"></tbody></table>
+</section>
+</main>
+<div class="busy" id="busy"></div>
+
+<dialog id="dlg"><form method="dialog" class="dlg" id="dlgform">
+  <h3 id="dlgtitle">Set ID</h3>
+  <div class="state" id="dlgsub"></div>
+  <label for="joint">Give it a joint</label>
+  <select id="joint"></select>
+  <label for="newid">or type an ID (1 to 253)</label>
+  <input id="newid" type="number" min="1" max="253" inputmode="numeric">
+  <label for="who">Your name (saved in the change log)</label>
+  <input id="who" type="text" maxlength="40" placeholder="name">
+  <ul class="warns" id="warns"></ul>
+  <div class="row"><button value="cancel" type="submit">Cancel</button><button class="primary" id="go" type="button">Set ID</button></div>
+  <div class="result" id="result" hidden></div>
+</form></dialog>
+
+<script>
+"use strict";
+const base = location.pathname.replace(/[^/]*$/, "");
+const $ = (id) => document.getElementById(id);
+let S = null, cards = {}, traces = {}, lastKey = "", frames = 0, fps = 0, lastMsg = 0, sel = null;
+const TRACE_S = 10;
+// Manual control (we 15:23): only with ?control in the URL; the customer view never shows it.
+const CONTROL = new URLSearchParams(location.search).has("control");
+let sock = null; const want = {};
+function send(c) { if (sock && sock.readyState === 1) sock.send(JSON.stringify(c)); else cmd(c); }
+// at most one goal per held servo per 20 ms (50 Hz), over the open socket
+setInterval(() => { for (const id in want) { send({op: "goal", id: +id, pos: want[id]}); delete want[id]; } }, 20);
+
+function fmtT(t) { const d = new Date(t * 1000); return d.toTimeString().slice(0, 8); }
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function onBus(id) { return S && S.rows.some(r => r.id === id && !r.stale); }
+
+function connect() {
+  const ws = sock = new WebSocket((location.protocol === "https:" ? "wss://" : "ws://") + location.host + base + "ws/bus");
+  ws.onmessage = (m) => { try { S = JSON.parse(m.data); lastMsg = performance.now(); frames++; draw(); } catch (e) {} };
+  ws.onclose = () => { setTimeout(connect, 1000); };
+  ws.onerror = () => { try { ws.close(); } catch (e) {} };
+}
+setInterval(() => { fps = frames; frames = 0; }, 1000);
+
+function stateOf(r) {
+  if (r.stale) return ["", "not answering for " + Math.round(r.seen_ago) + " s"];
+  if (r.verdict === "duplicate") return ["bad", "2+ servos on this ID: unplug one"];
+  if (r.verdict === "weak") return ["warn", "weak signal: " + r.clean + " of " + r.reads + " reads clean (cable or connector)"];
+  if (r.verdict === "checking") return ["", "checking..."];
+  return ["ok", "reading clean, " + r.clean + "/" + r.reads];
+}
+
+function card(r) {
+  const el = document.createElement("div");
+  el.className = "card";
+  el.innerHTML = `<div class="top"><span class="dot"></span><span class="name"></span><span class="grow"></span><span class="id"></span></div>
+  <div class="state"></div>
+  <div class="angle"><div class="deg">-</div><canvas class="spark"></canvas></div>
+  <div class="stats">
+    <div><b data-k="load">-</b><span>load</span></div>
+    <div><b data-k="cur">-</b><span>current</span></div>
+    <div><b data-k="temp">-</b><span>temperature</span></div>
+    <div><b data-k="volt">-</b><span>supply</span></div>
+    <div><b data-k="tq">-</b><span>torque</span></div>
+    <div><b data-k="cap">-</b><span>torque cap</span></div>
+    <div><b data-k="range">-</b><span>angle limits</span></div>
+    <div><b data-k="delay">-</b><span>reply delay</span></div>
+    <div><b data-k="seen">-</b><span>last seen</span></div>
+  </div>
+  <div class="lim"><div class="limtxt"></div><div class="limrec"></div>
+  <div class="row2"><button data-a="rec" title="Forget this servo's recorded range; then turn it by hand (torque off) from one end stop to the other">Record</button><button data-a="save" title="Limits = recorded ends minus 3 degrees each side, written into the servo (EEPROM 9/11) and read back">Save limits</button></div></div>
+  <div class="acts"><button data-a="setid">Set ID</button><button data-a="off" class="danger">Torque off</button></div>
+  <div class="ctl" hidden><div class="row2"><button data-a="hold" title="Holds the servo where it is now with at most 30 % torque, then the slider moves it">Enable slider</button>
+  <input type="range" min="0" max="4095" step="1" disabled><span class="tgt">-</span></div></div>`;
+  el.querySelector('[data-a="setid"]').onclick = () => openSet(r.id);
+  el.querySelector('[data-a="rec"]').onclick = () => post("api/limits/record", {id: r.id});
+  el.querySelector('[data-a="save"]').onclick = async () => {
+    const row = S.rows.find(x => x.id === r.id), sn = row && row.seen;
+    if (!sn) return alert("Nothing recorded for ID " + r.id + " yet. Press Record and turn it end to end.");
+    const lo = sn.min + 34, hi = sn.max - 34;
+    if (!confirm(`Save limits for ${row.name} (ID ${r.id})?\n\nRecorded ${sn.min}–${sn.max} counts (${((sn.max - sn.min) * 360 / 4096).toFixed(0)}°).\nLimits ${lo}–${hi} (3° in from each end), written into the servo.\n\nOnly save after turning it from one end stop to the other.`)) return;
+    const res = await post("api/limits/save", {id: r.id, who: localStorage.getItem("who") || "bus page"});
+    alert(res.why || JSON.stringify(res));
+  };
+  el.querySelector('[data-a="off"]').onclick = () => cmd({op: "torque", on: false, id: r.id});
+  if (CONTROL) {
+    el.querySelector(".ctl").hidden = false;
+    const sl = el.querySelector("input[type=range]");
+    el.querySelector('[data-a="hold"]').onclick = () => {
+      const row = S.rows.find(x => x.id === r.id);
+      send({op: "hold", id: r.id, on: !(row && row.held)});
+      el.dataset.grab = "";
+    };
+    sl.oninput = () => { el.dataset.grab = "1"; want[r.id] = +sl.value; };
+    sl.onchange = () => { want[r.id] = +sl.value; };
+  }
+  return el;
+}
+
+function spark(cv, pts, now) {
+  const dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
+  if (cv.width !== Math.round(w * dpr) || cv.height !== Math.round(h * dpr)) { cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); }
+  const g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+  if (pts.length < 2) return;
+  let lo = Infinity, hi = -Infinity; for (const p of pts) { lo = Math.min(lo, p[1]); hi = Math.max(hi, p[1]); }
+  if (hi - lo < 20) { const m = (hi + lo) / 2; lo = m - 10; hi = m + 10; }
+  g.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue("--spark"); g.lineWidth = 1.6; g.beginPath();
+  pts.forEach((p, i) => { const x = w - (now - p[0]) / TRACE_S * w, y = h - 3 - (p[1] - lo) / (hi - lo) * (h - 6); i ? g.lineTo(x, y) : g.moveTo(x, y); });
+  g.stroke();
+}
+
+function draw() {
+  const now = S.t;
+  const age = (performance.now() - lastMsg) / 1000;
+  const h = S.health;
+  let dot = "ok", txt = `live · bus read ${Math.round(h.hz || 0)}×/s · page ${fps}/s · ${S.rows.filter(r => !r.stale).length} servo${S.rows.length === 1 ? "" : "s"}`;
+  if (!h.ok) { dot = "bad"; txt = "bus not answering"; }
+  if (S.fake) txt += " · DEMO BUS";
+  $("livedot").className = "dot " + dot; $("livetxt").textContent = txt;
+
+  // banners: duplicates first, then the bus itself
+  let b = "";
+  for (const r of S.rows.filter(r => r.verdict === "duplicate" && !r.stale)) {
+    b += `<div class="banner bad">2 or more servos are on ID ${r.id}. Unplug one of them.<small>${esc(r.why)}. Two servos with the same ID answer at once and garble each other; setting an ID now would change both.</small></div>`;
+  }
+  if (!h.ok) b += `<div class="banner bad">The bus is not answering.<small>${esc(h.note || h.last_error)}</small></div>`;
+  else if (h.note && S.events.length && ["stall","recover"].includes(S.events[0].kind)) b += `<div class="banner warn">${esc(h.note)}</div>`;
+  const live = S.rows.filter(r => !r.stale);
+  if (h.ok && !live.length) b += `<div class="banner bad">No servo answers right now${S.registry && S.registry[100] ? ", the bench adapter (ID 100) included" : ""}.<small>The board talks to the bus, but nothing replies. ${S.rows.length ? "Grey cards are what answered last; they go away after the next full scan. " : ""}If a servo or lead was just plugged in, unplug it: a bad one can hold the whole bus down. Every servo shows up here within 2 seconds of answering.</small></div>`;
+  if ($("banners").innerHTML !== b) $("banners").innerHTML = b;
+
+  const key = S.rows.map(r => r.id).join(",");
+  if (key !== lastKey) {
+    lastKey = key; const grid = $("grid"); grid.innerHTML = ""; const keep = {};
+    for (const r of S.rows) { keep[r.id] = cards[r.id] || card(r); grid.appendChild(keep[r.id]); }
+    cards = keep;
+  }
+  for (const r of S.rows) {
+    const el = cards[r.id]; if (!el) continue;
+    const [cls, st] = stateOf(r);
+    el.className = "card" + (r.stale ? " stale" : "") + (r.verdict === "duplicate" ? " dup" : "") + (r.verdict === "weak" ? " weak" : "");
+    el.querySelector(".dot").className = "dot " + (r.stale ? "" : cls === "ok" ? "ok" : cls);
+    el.querySelector(".name").textContent = r.name;
+    el.querySelector(".id").textContent = "ID " + r.id;
+    const s = el.querySelector(".state"); s.textContent = st; s.className = "state " + cls;
+    el.querySelector(".deg").innerHTML = r.deg != null ? `${r.deg.toFixed(1)}°<br><small>${r.pos} counts</small>` : "-";
+    const set = (k, v) => { el.querySelector(`[data-k="${k}"]`).textContent = v; };
+    set("load", r.load_pct != null ? r.load_pct.toFixed(1) + " %" : "-");
+    set("cur", r.current_ma != null ? r.current_ma + " mA" : "-");
+    set("temp", r.temp != null ? r.temp + " °C" : "-");
+    set("volt", r.volt != null ? r.volt.toFixed(1) + " V" : "-");
+    set("tq", r.torque == null ? "-" : r.torque ? "ON" : "off");
+    set("cap", r.torque_limit != null ? (r.torque_limit / 10) + (r.ee ? "/" + r.ee.max_torque / 10 : "") + " %" : "-");
+    set("range", r.band ? r.band[0] + "–" + r.band[1] : "NONE");
+    { const lt = el.querySelector(".limtxt"), lr = el.querySelector(".limrec");
+      const eeOk = r.lim && r.lim.eeprom, fac = r.ee && r.ee.min_angle === 0 && r.ee.max_angle >= 4095;
+      lt.className = "limtxt " + (r.band ? (eeOk || !fac ? "ok" : "warn") : "bad");
+      lt.textContent = r.band ? `Limits ${r.band[0]}–${r.band[1]} counts (${((r.band[1] - r.band[0]) * 360 / 4096).toFixed(0)}°)` + (r.lim ? (eeOk ? ", in the servo ✓" : ", NOT in the servo EEPROM") : ", from the servo") + (r.lim && r.lim.who ? " · " + r.lim.who + " " + (r.lim.when || "").slice(5, 16) : "")
+        : "No limits: this servo will not be moved. Record, turn it end to end, Save.";
+      const sn = r.seen;
+      lr.textContent = sn ? `Recorded ${sn.min}–${sn.max} (${((sn.max - sn.min) * 360 / 4096).toFixed(0)}°, ${sn.n} reads)` + (sn.wrapped ? " · crossed 0/4095: Record again" : "") : "Recording starts with the next torque-off read"; }
+    set("delay", r.ee ? r.ee.return_delay_us + " µs" : "-");
+    set("seen", r.seen_ago < 1 ? "now" : r.seen_ago.toFixed(0) + " s ago");
+    const tr = traces[r.id] || (traces[r.id] = []);
+    if (r.pos != null && !r.stale && (!tr.length || tr[tr.length - 1][0] !== now)) tr.push([now, r.pos]);
+    while (tr.length && now - tr[0][0] > TRACE_S) tr.shift();
+    spark(el.querySelector("canvas"), tr, now);
+    if (CONTROL) {
+      const b = el.querySelector('[data-a="hold"]'), sl = el.querySelector("input[type=range]");
+      b.textContent = r.held ? "Release (torque off)" : "Enable slider"; b.className = r.held ? "on" : "";
+      if (r.band) { sl.min = r.band[0]; sl.max = r.band[1]; }
+      b.disabled = !r.held && (r.verdict !== "ok" || !r.band);
+      if (!r.band && !r.held) b.title = "No angle limits saved: Record and Save first";
+      sl.disabled = !r.held || r.stale;
+      if (!r.held || !el.dataset.grab) { if (r.pos != null) sl.value = r.pos; }
+      el.querySelector(".tgt").textContent = r.held ? sl.value + " → " + (r.pos ?? "-") : (r.pos ?? "-");
+    }
+  }
+
+  $("events").innerHTML = S.events.slice(0, 14).map(e => `<span class="t">${fmtT(e.t)}</span><span class="${e.kind}">${esc(e.text)}</span>`).join("");
+  const reg = S.registry || {};
+  const regHtml = Object.keys(reg).map(Number).sort((a, b) => a - b).map(id =>
+    `<tr><td>${id}</td><td>${esc(reg[id].joint)}</td><td>${esc(reg[id].since)}</td><td>${onBus(id) ? "on the bus" : ""}</td></tr>`).join("");
+  if ($("reg").innerHTML !== regHtml) $("reg").innerHTML = regHtml;
+  const busy = $("busy"); busy.style.display = S.busy ? "block" : "none"; busy.textContent = S.busy || "";
+  if (sel != null && $("dlg").open) checkSet();
+}
+
+async function post(path, body) { try { const r = await fetch(base + path, {method: "POST", body: JSON.stringify(body)}); return await r.json(); } catch (e) { return {why: String(e)}; } }
+async function cmd(c) { await fetch(base + "api/cmd", {method: "POST", body: JSON.stringify(c)}); }
+$("alloff").onclick = () => cmd({op: "torque", on: false});
+
+// ---- set ID ----
+function regTaken(id) { const r = (S.registry || {})[id]; return r && id !== sel ? r : null; }
+function tempId() { for (let i = 101; i <= 199; i++) if (!(S.registry || {})[i] && !onBus(i)) return i; return null; }
+function openSet(id) {
+  sel = id; const r = S.rows.find(x => x.id === id);
+  $("dlgtitle").textContent = "Set ID of " + (r ? r.name : "ID " + id);
+  $("dlgsub").textContent = "Now ID " + id + ". Only this servo may be on ID " + id + ".";
+  const opts = ['<option value="">choose a joint</option>'];
+  for (const [jid, name] of S.joints) {
+    const t = regTaken(jid), on = onBus(jid) && jid !== id;
+    const why = on ? " (on the bus now)" : t ? " (taken: " + t.joint + ")" : "";
+    opts.push(`<option value="${jid}" ${why ? "disabled" : ""}>${esc(name)} → ID ${jid}${why}</option>`);
+  }
+  $("joint").innerHTML = opts.join(""); $("newid").value = "";
+  try { $("who").value = localStorage.getItem("servo-who") || ""; } catch (e) {}
+  $("result").hidden = true; $("dlg").showModal(); checkSet();
+}
+$("joint").onchange = () => { $("newid").value = $("joint").value; checkSet(); };
+$("newid").oninput = () => { $("joint").value = ""; checkSet(); };
+function checkSet() {
+  const n = parseInt($("newid").value, 10), r = S.rows.find(x => x.id === sel), w = [];
+  if (!r || r.stale) w.push(`No servo answers on ID ${sel} right now.`);
+  else if (r.verdict === "duplicate") w.push(`2 or more servos are on ID ${sel}: unplug all but one first. A write now would change both.`);
+  else if (r.verdict !== "ok") w.push(`ID ${sel} does not read clean yet (${r.clean}/${r.reads}); the change needs 30 of 30 clean reads.`);
+  if (!isNaN(n)) {
+    if (n < 1 || n > 253) w.push("Pick an ID from 1 to 253.");
+    else if (n === sel) w.push("It already has this ID.");
+    else if (onBus(n)) w.push(`ID ${n} is on the bus now (${(S.rows.find(x => x.id === n) || {}).name}). Two servos would share it.`);
+    else if (regTaken(n)) w.push(`ID ${n} is already given to another servo: ${regTaken(n).joint}, since ${regTaken(n).since}. It may be unplugged, but it still has this ID.`);
+  }
+  const t = tempId();
+  $("warns").innerHTML = w.map(x => `<li>${esc(x)}</li>`).join("") + (w.length && t && !isNaN(n) && n !== t ? `<li class="okk">Free temporary ID: <button type="button" id="usetemp">use ${t}</button></li>` : "") + (!w.length && !isNaN(n) ? `<li class="okk">ID ${n} is free.</li>` : "");
+  const ut = $("usetemp"); if (ut) ut.onclick = () => { $("newid").value = t; $("joint").value = ""; checkSet(); };
+  $("go").disabled = isNaN(n) || w.length > 0 || !!S.busy;
+}
+$("go").onclick = async () => {
+  const n = parseInt($("newid").value, 10), who = $("who").value.trim();
+  try { localStorage.setItem("servo-who", who); } catch (e) {}
+  const joint = $("joint").value ? S.joints.find(j => j[0] === n)[1] : "";
+  $("go").disabled = true; $("result").hidden = false; $("result").textContent = `Changing ID ${sel} to ${n}: 30 clean reads, write, 30 reads back, caps, torque off...`;
+  try {
+    const r = await (await fetch(base + "api/setid", {method: "POST", body: JSON.stringify({old: sel, new: n, joint, who})})).json();
+    $("result").innerHTML = (r.ok ? "✅ " : r.written ? "⚠️ " : "⛔ Not changed: ") + esc(r.why || r.error) + (r.suggest && !r.ok ? `<br>Free temporary ID: ${r.suggest}` : "");
+    if (r.ok) sel = n;
+  } catch (e) { $("result").textContent = "No answer from the bus: " + e; }
+};
+
+connect();
+
+// Walk tab (src/policy.rs): start/stop the walking policy through the daemon's gated raw door
+async function walk() {
+  let p; try { p = await (await fetch(base + "api/policy")).json(); } catch (e) { return; }
+  const box = document.getElementById("walk");
+  box.hidden = !p.available;
+  if (!p.available) return;
+  const st = document.getElementById("wstate");
+  st.textContent = p.running ? `running since ${new Date(p.since * 1000).toLocaleTimeString()}, motion ${Math.round(p.amp * 100)} %, torque ${Math.round(p.cap / 10)} %, by ${p.who}${p.stopping ? ", stopping" : ""}` : (p.last_exit || "stopped");
+  document.getElementById("wstart").disabled = p.running;
+  document.getElementById("wstop").disabled = !p.running;
+  document.getElementById("wtail").textContent = p.tail || "";
+}
+document.getElementById("wstart").onclick = async () => {
+  const amp = +document.getElementById("wamp").value / 100, cap = Math.round(+document.getElementById("wcap").value * 10);
+  if (!confirm(`Start the walking network at ${Math.round(amp * 100)} % motion and ${cap / 10} % torque? Every goal stays inside the saved limits.`)) return;
+  const r = await post("api/policy", {op: "start", amp, cap});
+  if (!r.ok) alert(r.why || "not started");
+  walk();
+};
+document.getElementById("wstop").onclick = async () => { await post("api/policy", {op: "stop"}); walk(); };
+walk(); setInterval(walk, 1000);
+</script>
+</body>
+</html>

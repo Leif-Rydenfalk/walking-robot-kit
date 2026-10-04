@@ -1,0 +1,38 @@
+Walking robot kit: electronics and control software
+Copyright 2026 Leif Rydenfalk
+
+Licensed under the Apache License, Version 2.0 for software and firmware, and
+under CC BY-SA 4.0 for the board designs. See README.md.
+
+This work builds on, and credits:
+
+Open Duck Mini v2, by Antoine Pirrone and contributors.
+  Apache License 2.0.
+  https://github.com/apirrone/Open_Duck_Mini
+  The joint layout and the servo numbering convention this project uses come
+  from that project. No geometry from it is redistributed here.
+
+Arduino UNO Media Carrier (ASX00083), by Arduino SA.
+  Hardware design files, CC BY-SA 4.0.
+  https://docs.arduino.cc/hardware/uno-media-carrier
+  The two 2x30 board-to-board headers, the 22-pin camera flex connector and the
+  ten length-matched CSI0 tracks between them on electronics/hat are copied from
+  Arduino's layout, translated in place and otherwise unchanged. The LED matrix
+  pitch used by the firmware was read off Arduino drawing ABX00162. The hat
+  design is therefore released under CC BY-SA 4.0 as well.
+
+Arduino UNO Q core libraries (Arduino_RouterBridge, Arduino_RPClite), by
+Arduino SA.
+  The sketch in firmware/bus-bridge links them. They ship with the UNO Q
+  platform under their own licences and are not copied into this repository.
+
+KiCad footprint and symbol libraries, by the KiCad developers.
+  CC BY-SA 4.0 with the KiCad library exception.
+  The footprints named Resistor_SMD:*, Capacitor_SMD:*, Package_*:* and
+  Connector_JST:* in the board files come from those libraries. The exception
+  means boards made with them carry no licence obligation of their own.
+
+Feetech HD-1910-C001 servo.
+  The register map and timing in software/servo-bus/src/feetech.rs were read
+  off Feetech's own STS protocol documentation and measured on real hardware.
+  No vendor file is redistributed here.

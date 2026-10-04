@@ -1,0 +1,16 @@
+[package]
+name = "servo-bus"
+version = "0.1.0"
+edition = "2021"
+description = "Owns a Feetech-style TTL servo bus behind an Arduino Uno Q MCU: live control and telemetry over WebSocket, "
+publish = false
+
+# No dependencies on purpose: the board build is one crate, the binary is small, and every
+# byte on the latency path (msgpack to the router, WebSocket to the page) is code in src/.
+[dependencies]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
