@@ -1,0 +1,15 @@
+[Unit]
+Description=servo-bus: owns the the robot servo bus on the Uno Q (Rust daemon)
+After=network.target
+
+[Service]
+ExecStart=/home/arduino/servo-bus --port 8938 --registry /home/arduino/servo-bus-ids.json --matrix-frame /home/arduino/robot-control/out/unoq-leg/matrix_frame.bin --policy-dir /home/arduino/robot-control
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target
+
+# Install on the board (aarch64 Linux side, systemd --user is available per bridge.py docs):
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now servo-bus

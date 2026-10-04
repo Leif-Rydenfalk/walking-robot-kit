@@ -1,0 +1,10 @@
+(version 1)
+# JLCPCB 4-layer 1 oz limits, jlcpcb.com/capabilities/pcb-capabilities read 2026-10-03
+(rule jlc_track (constraint track_width (min 0.09mm)))
+(rule jlc_clear (constraint clearance (min 0.09mm)))
+(rule jlc_pad_pad (constraint clearance (min 0.15mm)) (condition "A.Type == 'Pad' && B.Type == 'Pad' && A.Net != B.Net"))
+(rule jlc_via_hole (constraint hole_size (min 0.15mm)) (condition "A.Type == 'Via'"))
+(rule jlc_via_dia (constraint via_diameter (min 0.25mm)))
+(rule jlc_via_hole_track (constraint hole_clearance (min 0.2mm)) (condition "A.Type == 'Via'"))
+(rule jlc_via_h2h (constraint hole_to_hole (min 0.2mm)))
+(rule jlc_edge (constraint edge_clearance (min 0.3mm)))

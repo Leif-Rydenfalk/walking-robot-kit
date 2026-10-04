@@ -1,0 +1,5 @@
+name: servo-bus-bridge
+icon: "🔁"
+description: Feetech-style TTL servo bus on D0/D1 (Serial1), reachable from the Linux side over RouterBridge.
+ports: []
+bricks: []

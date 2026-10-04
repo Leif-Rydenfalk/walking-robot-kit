@@ -1,0 +1,100 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>the robot servos — live control</title><style>
+:root{--bg:#fafaf7;--fg:#1c1c1a;--mut:#6b6b66;--card:#fff;--line:#e4e2dc;--acc:#d9480f;--ok:#2f9e44;--bad:#e03131;--blue:#1971c2}
+@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#eceae4;--mut:#9a988f;--card:#20201d;--line:#34332e}}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.4 -apple-system,system-ui,sans-serif;padding:16px;max-width:1080px;margin:auto}
+h1{font-size:20px;margin:0 0 4px}.mut{color:var(--mut);font-size:13px}
+.bar{display:flex;gap:8px;align-items:center;margin:12px 0;flex-wrap:wrap}
+button{font:inherit;padding:10px 18px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
+button.go{background:var(--acc);color:#fff;border-color:var(--acc)}
+button.kill{background:var(--bad);color:#fff;border-color:var(--bad);font-weight:600}
+button.tq{padding:6px 12px;font-size:13px}
+button.tq.on{background:var(--ok);color:#fff;border-color:var(--ok)}
+input[type=number]{font:inherit;width:70px;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
+input[type=range]{width:100%;accent-color:var(--acc);cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.card h2{font-size:16px;margin:0 0 8px;display:flex;justify-content:space-between;align-items:center}
+.row{display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.row:last-child{border:0}.big{font-size:28px;font-weight:600;font-variant-numeric:tabular-nums}
+canvas{width:100%;height:180px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-top:12px}
+.dot{width:10px;height:10px;border-radius:5px;display:inline-block}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-variant-numeric:tabular-nums;font-size:14px}
+.chip b{font-size:17px}
+</style></head><body>
+<h1>the robot servos, live control</h1><div class=mut id=sub>connecting</div>
+<div class=bar>
+  <button class=go onclick=wave()>Start wave</button>
+  <span class=mut>amp° <input type=number id=amp value=45 min=1 max=45 step=1></span>
+  <span class=mut>period s <input type=number id=per value=3 min=0.5 max=10 step=0.5></span>
+  <button onclick=stopw()>Stop wave</button>
+  <button class=kill onclick=stopall()>STOP ALL · torque off</button>
+  <span class=chip title="command received by the daemon -> first encoder change >= 8 counts, measured on the board">cmd→encoder <b id=lat>–</b> ms</span>
+  <span class=chip title="STOP ALL command -> every online servo reporting torque off">stop→limp <b id=stopms>–</b> ms</span>
+</div>
+<div class="grid" id=grid></div>
+<div class="grid" id=sliders style="margin-top:12px"></div>
+<canvas id=c></canvas>
+<div class=mut style="margin-top:8px">Slider: drag to steer one servo (stops the wave; torque must be on). Degrees are the wave's calibrated band, 2048 counts ~ 90°. Telemetry: one bus read per servo per tick at ~50 Hz, straight on the Uno Q. Current is the servo's raw reading; its unit is not yet confirmed for the HD-1910.</div>
+<script>
+const C=['#d9480f','#1971c2','#2f9e44'];
+const G={ids:[],drag:{},ws:null,hist:[],sig:''};
+const FIELDS=[['pos','Position',v=>v.pos+' / 4095'],['speed','Speed',v=>v.speed+' steps/s'],['load','Load',v=>v.load],
+  ['volt','Voltage',v=>v.volt.toFixed(1)+' V'],['temp','Temperature',v=>v.temp+' °C'],['current','Current (raw)',v=>v.current],['status','Status byte',v=>v.status]];
+function send(o){if(G.ws&&G.ws.readyState==1)G.ws.send(JSON.stringify(o))}
+function wave(){send({op:'wave',amp:+document.getElementById('amp').value,period:+document.getElementById('per').value})}
+function stopw(){send({op:'stop'})}
+function stopall(){send({op:'stopall'})}
+function torque(id,on){send({op:'torque',id,on})}
+function slide(id,v){G.drag[id]=true;send({op:'move',id,deg:+v});
+  document.getElementById('sl'+id+'v').textContent=(+v).toFixed(1)+'°';
+  document.getElementById('d'+id).textContent=(+v).toFixed(1)+'°'}
+function released(id){setTimeout(()=>{delete G.drag[id]},700)}
+function buildCards(s){
+  document.getElementById('grid').innerHTML=s.ids.map((i,k)=>{
+    const v=(s.servos||[]).find(x=>x.id==i)||{};
+    if(!v.ok)return `<div class=card><h2>Servo ${i}<span style="color:var(--bad)" id="st${i}">no reply</span></h2></div>`;
+    return `<div class=card><h2><span><span class=dot style="background:${C[k]}"></span> Servo ${i}</span>
+      <button class="tq${v.torque?' on':''}" id="t${i}" onclick="torque(${i},${!v.torque})">torque ${v.torque?'on':'off'}</button></h2>
+    <div class=big id="d${i}">${v.deg}°</div>${FIELDS.map(([f,l])=>`<div class=row><span>${l}</span><b id="f${i}_${f}">–</b></div>`).join('')}</div>`;
+  }).join('');
+  document.getElementById('sliders').innerHTML=s.ids.map((i,k)=>`<div class=card><h2><span class=dot style="background:${C[k]}"></span> Servo ${i} slider</h2>
+  <div class=big id=sl${i}v>–</div><input type=range min=0 max=90 step=0.5 value=45 id="s${i}"
+    oninput="slide(${i},this.value)" onmouseup="released(${i})" ontouchend="released(${i})"></div>`).join('');
+}
+function update(s){
+  const sig=s.ids.map(i=>{const v=(s.servos||[]).find(x=>x.id==i)||{};return i+':'+(v.ok?1:0)+(v.torque?1:0)}).join('|');
+  if(sig!=G.sig){G.sig=sig;buildCards(s)}
+  s.servos.filter(v=>v.ok).forEach(v=>{
+    document.getElementById('d'+v.id).textContent=v.deg+'°';
+    FIELDS.forEach(([f,,fmt])=>{const el=document.getElementById(`f${v.id}_${f}`);if(el)el.textContent=fmt(v)});
+    if(!G.drag[v.id])document.getElementById('s'+v.id).value=v.deg;
+    if(!G.drag[v.id])document.getElementById('sl'+v.id+'v').textContent=v.deg+'°';
+  });
+}
+function draw(){
+  const cv=document.getElementById('c'),r=devicePixelRatio||1;cv.width=cv.clientWidth*r;cv.height=cv.clientHeight*r;
+  const g=cv.getContext('2d'),h=G.hist;if(h.length<2)return;const t0=h[0][0],t1=h[h.length-1][0],W=cv.width,H=cv.height;
+  g.lineWidth=2*r;G.ids.forEach((id,k)=>{g.strokeStyle=C[k];g.beginPath();let m=0;
+    h.forEach(p=>{if(isNaN(p[k+1]))return;const x=(p[0]-t0)/(t1-t0||1)*W,y=H-(p[k+1]-900)/(3200-900)*H;m?g.lineTo(x,y):g.moveTo(x,y);m=1});g.stroke()});
+}
+function onmsg(ev){
+  const s=JSON.parse(ev.data);G.ids=s.ids;
+  if(s.hist)G.hist=s.hist;
+  document.getElementById('sub').textContent=(s.bus_ok?'':'bus down · ')+(s.wave?('Wave running since '+s.started+', '+s.moves+' moves')
+    :(s.mode=='manual'?'Manual control'+(s.why?' · '+s.why:''))
+    :('Stopped'+(s.why?': '+s.why:'')))+(s.cooling?' · cooling, resumes at 45 °C':'')
+    +' · Uno Q bus 1 Mbit/s · '+new Date(s.t*1000).toLocaleTimeString();
+  document.getElementById('lat').textContent=s.lat&&s.lat.median!=null?(s.lat.last+' / '+s.lat.median):'–';
+  document.getElementById('stopms').textContent=s.stop_ms!=null?s.stop_ms:'–';
+  update(s);draw();
+}
+function connect(){
+  const ws=new WebSocket((location.protocol=='https:'?'wss://':'ws://')+location.host+'/ws');
+  ws.onopen=()=>{document.getElementById('sub').textContent='connected'};
+  ws.onmessage=onmsg;
+  ws.onclose=()=>{document.getElementById('sub').textContent='reconnecting';setTimeout(connect,800)};
+  G.ws=ws;
+}
+connect();
+</script></body></html>

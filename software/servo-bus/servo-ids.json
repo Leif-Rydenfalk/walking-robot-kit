@@ -1,0 +1,20 @@
+{
+  "note": "Servo IDs, one per joint. Every servo ships at ID 1, so set them one at a time, before you wire the chain.",
+  "ids": {
+    "10": "Right hip yaw",
+    "11": "Right hip roll",
+    "12": "Right hip pitch",
+    "13": "Right knee",
+    "14": "Right ankle",
+    "20": "Left hip yaw",
+    "21": "Left hip roll",
+    "22": "Left hip pitch",
+    "23": "Left knee",
+    "24": "Left ankle",
+    "30": "Neck pitch",
+    "31": "Head pitch",
+    "32": "Head yaw",
+    "33": "Head roll",
+    "34": "Mouth"
+  }
+}

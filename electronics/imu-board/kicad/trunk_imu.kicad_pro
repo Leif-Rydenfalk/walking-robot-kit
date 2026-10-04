@@ -1,0 +1,59 @@
+{
+  "board": {
+    "design_settings": {
+      "rules": {
+        "min_clearance": 0.127,
+        "min_track_width": 0.127,
+        "min_hole_clearance": 0.25,
+        "min_through_hole_diameter": 0.2,
+        "min_via_diameter": 0.4,
+        "min_resolved_spokes": 1.0
+      }
+    }
+  },
+  "net_settings": {
+    "classes": [
+      {
+        "name": "Default",
+        "clearance": 0.127,
+        "track_width": 0.127,
+        "via_diameter": 0.45,
+        "via_drill": 0.25
+      },
+      {
+        "name": "RAIL",
+        "clearance": 0.127,
+        "track_width": 0.3,
+        "via_diameter": 0.45,
+        "via_drill": 0.25,
+        "priority": 0
+      },
+      {
+        "name": "BUS",
+        "clearance": 0.127,
+        "track_width": 0.25,
+        "via_diameter": 0.45,
+        "via_drill": 0.25,
+        "priority": 1
+      }
+    ],
+    "netclass_patterns": [
+      {
+        "netclass": "RAIL",
+        "pattern": "+3V3"
+      },
+      {
+        "netclass": "BUS",
+        "pattern": "SDA"
+      },
+      {
+        "netclass": "BUS",
+        "pattern": "SCL"
+      }
+    ]
+  },
+  "meta": {
+    "filename": "trunk_imu.kicad_pcb",
+    "version": 3
+  }
+}
