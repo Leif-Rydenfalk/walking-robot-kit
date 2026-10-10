@@ -14,6 +14,12 @@ About 15 minutes. Everything else is done and checked.
 
 ## Files (all in `electronics/hat/`)
 
+Download links (30 days, same bytes as the hashes below; checked by foreman/microduck-assembly 2026-10-10 17:10 CEST):
+[gerbers.zip](https://media.ce-net.com/o/5cdad18f8c704fcf229e312edadb4709ed78da27125f4068d5a359474794430f.zip?e=1794236194&t=7d5bd14c4f379a45c7c94dd437c3bb34) ·
+[bom.csv](https://media.ce-net.com/o/5f05a8434ca9145fbedfdcf7bfce9ce96e01fe3ac6b7256be1dc7a8af0f17434.csv?e=1794236182&t=6ac725e47bc903313ea6847b1dbcb6b3) ·
+[cpl.csv](https://media.ce-net.com/o/4b424a0854ed8e4dba3355d99951e6e669d14866a8e7db7097f7a5bac97cdfcf.csv?e=1794236189&t=7a4ca2b2a8a736d2482f3b3cd7dec90e)
+
+
 | file | what | sha256 (first 12) |
 |---|---|---|
 | `fab/gerbers.zip` | 4-layer gerbers + drills, 31 files | 5cdad18f8c70 |
