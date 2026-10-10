@@ -1,0 +1,31 @@
+{
+ "tool": "ce-fabmcp pcb_drc (fabkit.pcb 0.1.0)",
+ "run": "2026-10-10, foreman/microduck-assembly.60, gerbers of build #10 (fab/gerbers.zip sha256 5cdad18f8c70...); build #9 gave the same numbers",
+ "rules": {
+  "min_width": 0.09,
+  "min_clearance": 0.09,
+  "min_drill": 0.15,
+  "min_annular": 0.1
+ },
+ "layers": {
+  "In1_Cu": {
+   "verdict": "PASS",
+   "gap_mm": 0.127,
+   "drill": "PASS, 3 tools >= 0.15",
+   "annular_ring_mm": 0.1
+  },
+  "In2_Cu": {
+   "verdict": "PASS",
+   "gap_mm": 0.127
+  },
+  "F_Cu": {
+   "verdict": "FAIL (approximation)",
+   "gap_mm": 0.024
+  },
+  "B_Cu": {
+   "verdict": "FAIL (approximation)",
+   "gap_mm": 0.0008
+  }
+ },
+ "reading": "fabkit measures clearance between aperture circles, not polygons ('aperture approximation, not polygon DRC'). On F/B the 0.5 mm pitch rectangular pads (U10 VQFN, U1, U3, U8, J3 FFC, J1/J2 1.27 mm rows) are wider than their circle model allows, so neighbours of one IC read as touching. The inner layers have no fine-pitch pads and read 0.127 mm, the board rule. KiCad's polygon DRC on the same board: 0 errors, 0 warnings, 0 unconnected (checks/drc-build.json, checks/drc-jlc-rules.json)."
+}

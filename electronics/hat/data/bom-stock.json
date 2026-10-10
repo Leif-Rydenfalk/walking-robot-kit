@@ -1,6 +1,6 @@
 {
  "boards": 5,
- "fetched_utc": "2026-10-10T14:42:34Z",
+ "fetched_utc": "2026-10-10T14:53:22Z",
  "rows": [
   {
    "lcsc": "C191721",
@@ -20,7 +20,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/3aedae07ef21d25ca8d950ab4b2f9895.pdf?productCode=C191721",
    "jlc_stock": 782,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:41:55Z",
+   "fetched_utc": "2026-10-10T14:52:39Z",
    "ok": true
   },
   {
@@ -40,7 +40,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/1f4b27665a7c1a8cc6f29d17b6cec7db.pdf?productCode=C3169786",
    "jlc_stock": 1065,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:41:57Z",
+   "fetched_utc": "2026-10-10T14:52:40Z",
    "ok": true
   },
   {
@@ -60,7 +60,7 @@
    "datasheet": "https://www.ti.com/cn/lit/ds/symlink/tca9406.pdf",
    "jlc_stock": 16529,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:41:57Z",
+   "fetched_utc": "2026-10-10T14:52:41Z",
    "ok": true
   },
   {
@@ -88,9 +88,9 @@
    "lcsc_stock": 0,
    "lcsc_usd_10": 0.0034,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25744",
-   "jlc_stock": 19789151,
+   "jlc_stock": 19792653,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:41:58Z",
+   "fetched_utc": "2026-10-10T14:52:42Z",
    "ok": true
   },
   {
@@ -108,9 +108,9 @@
    "lcsc_stock": 0,
    "lcsc_usd_10": 0.0167,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C23733",
-   "jlc_stock": 2105700,
+   "jlc_stock": 2106090,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:41:59Z",
+   "fetched_utc": "2026-10-10T14:52:42Z",
    "ok": true
   },
   {
@@ -140,9 +140,9 @@
    "lcsc_stock": 6149000,
    "lcsc_usd_10": 0.0046,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C1525",
-   "jlc_stock": 24117063,
+   "jlc_stock": 24120121,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:42:00Z",
+   "fetched_utc": "2026-10-10T14:52:43Z",
    "ok": true
   },
   {
@@ -162,7 +162,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/b87b1e8b19259fa8f353ae4a0dd9a62d.pdf?productCode=C465732",
    "jlc_stock": 38410,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:00Z",
+   "fetched_utc": "2026-10-10T14:52:44Z",
    "ok": true
   },
   {
@@ -181,9 +181,9 @@
    "lcsc_stock": 0,
    "lcsc_usd_10": 0.0883,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C1713",
-   "jlc_stock": 325625,
+   "jlc_stock": 325605,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:01Z",
+   "fetched_utc": "2026-10-10T14:52:44Z",
    "ok": true
   },
   {
@@ -203,7 +203,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/e03a82bcc66e3c3589917313e54d45e2.pdf?productCode=C160392",
    "jlc_stock": 30892,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:02Z",
+   "fetched_utc": "2026-10-10T14:52:45Z",
    "ok": true
   },
   {
@@ -222,9 +222,9 @@
    "lcsc_stock": 0,
    "lcsc_usd_10": 0.0025,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C17168",
-   "jlc_stock": 8048582,
+   "jlc_stock": 8049350,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:42:03Z",
+   "fetched_utc": "2026-10-10T14:52:46Z",
    "ok": true
   },
   {
@@ -247,7 +247,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/40c649e22fa9bda892cfec952005fd51.pdf?productCode=C160402",
    "jlc_stock": 27276,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:03Z",
+   "fetched_utc": "2026-10-10T14:52:47Z",
    "ok": true
   },
   {
@@ -265,9 +265,9 @@
    "lcsc_stock": 0,
    "lcsc_usd_10": 0.0018,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25879",
-   "jlc_stock": 1608087,
+   "jlc_stock": 1608192,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:42:04Z",
+   "fetched_utc": "2026-10-10T14:52:47Z",
    "ok": true
   },
   {
@@ -285,9 +285,9 @@
    "lcsc_stock": 64080,
    "lcsc_usd_10": 0.0755,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/3d79861610d54464b4b035cabb370158.pdf?productCode=C7834",
-   "jlc_stock": 64139,
+   "jlc_stock": 64125,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:05Z",
+   "fetched_utc": "2026-10-10T14:52:48Z",
    "ok": true
   },
   {
@@ -305,9 +305,9 @@
    "lcsc_stock": 60370,
    "lcsc_usd_10": 0.0753,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/397db609d8c243daaad8f1a233af4e5d.pdf?productCode=C23654",
-   "jlc_stock": 60384,
+   "jlc_stock": 60370,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:05Z",
+   "fetched_utc": "2026-10-10T14:52:49Z",
    "ok": true
   },
   {
@@ -327,7 +327,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/5fb8abfb58de49a9e93c5a14c4951afe.pdf?productCode=C727128",
    "jlc_stock": 384069,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:06Z",
+   "fetched_utc": "2026-10-10T14:52:50Z",
    "ok": true
   },
   {
@@ -347,7 +347,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25765",
    "jlc_stock": 2660305,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:42:07Z",
+   "fetched_utc": "2026-10-10T14:52:50Z",
    "ok": true
   },
   {
@@ -367,7 +367,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/b426be3ce22c6de3e0c3a2248e49159e.pdf?productCode=C138002",
    "jlc_stock": 7301498,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:08Z",
+   "fetched_utc": "2026-10-10T14:52:51Z",
    "ok": true
   },
   {
@@ -386,9 +386,9 @@
    "lcsc_stock": 991400,
    "lcsc_usd_10": 0.0038,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/b426be3ce22c6de3e0c3a2248e49159e.pdf?productCode=C106235",
-   "jlc_stock": 1985123,
+   "jlc_stock": 1985137,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:09Z",
+   "fetched_utc": "2026-10-10T14:52:52Z",
    "ok": true
   },
   {
@@ -406,9 +406,9 @@
    "lcsc_stock": 68320,
    "lcsc_usd_10": 0.0355,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/e91584fb3d2d85e136baa2628fef5f07.pdf?productCode=C151348",
-   "jlc_stock": 68357,
+   "jlc_stock": 68341,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:10Z",
+   "fetched_utc": "2026-10-10T14:52:53Z",
    "ok": true
   },
   {
@@ -428,27 +428,27 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/5d452729b69b0536541be9ab4ef736d3.pdf?productCode=C426769",
    "jlc_stock": 7930,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:11Z",
+   "fetched_utc": "2026-10-10T14:52:53Z",
    "ok": true
   },
   {
-   "lcsc": "C265102",
-   "value": "S4B-PH-SM4-TB 2S pack in",
-   "footprint": "Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal",
+   "lcsc": "C265405",
+   "value": "S6B-PH-SM4-TB 2S pack in",
+   "footprint": "Connector_JST:JST_PH_S6B-PH-SM4-TB_1x06-1MP_P2.00mm_Horizontal",
    "refs": [
     "J6"
    ],
    "qty_per_board": 1,
    "need": 5,
-   "mpn": "S4B-PH-SM4-TB(LF)(SN)",
+   "mpn": "S6B-PH-SM4-TB(LF)(SN)",
    "brand": "JST",
    "package": "SMD,P=2mm,Surface Mount,Right Angle",
-   "lcsc_stock": 23485,
-   "lcsc_usd_10": 0.3092,
-   "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/6c6fce4367275d84ec6a99bf09f1250f.pdf?productCode=C265102",
-   "jlc_stock": 23485,
+   "lcsc_stock": 5128,
+   "lcsc_usd_10": 0.3185,
+   "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/fd6b0599884a99953f02d32fdcec9311.pdf?productCode=C265405",
+   "jlc_stock": 5128,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:12Z",
+   "fetched_utc": "2026-10-10T14:52:54Z",
    "ok": true
   },
   {
@@ -468,7 +468,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0934e1c0e13d4ba28c7432f63cfc1997.pdf?productCode=C13899",
    "jlc_stock": 8327,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:12Z",
+   "fetched_utc": "2026-10-10T14:52:55Z",
    "ok": true
   },
   {
@@ -490,9 +490,9 @@
    "lcsc_stock": 1401300,
    "lcsc_usd_10": 0.0025,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25741",
-   "jlc_stock": 8079316,
+   "jlc_stock": 8079029,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:42:13Z",
+   "fetched_utc": "2026-10-10T14:52:55Z",
    "ok": true
   },
   {
@@ -512,7 +512,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/cfa74b12b2251ef3c7fa909bdad1e8a9.pdf?productCode=C702820",
    "jlc_stock": 9061,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:14Z",
+   "fetched_utc": "2026-10-10T14:52:56Z",
    "ok": true
   },
   {
@@ -532,7 +532,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/8822d9443d3405e5b17304ebbb56ac2c.pdf?productCode=C3200405",
    "jlc_stock": 32514,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:14Z",
+   "fetched_utc": "2026-10-10T14:52:57Z",
    "ok": true
   },
   {
@@ -553,7 +553,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/5d6d0805a03309170176423d23331af1.pdf?productCode=C77090",
    "jlc_stock": 18153,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:15Z",
+   "fetched_utc": "2026-10-10T14:52:58Z",
    "ok": true
   },
   {
@@ -576,7 +576,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/23ccee80ee542e7cf156a772bb589942.pdf?productCode=C105883",
    "jlc_stock": 2066779,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:16Z",
+   "fetched_utc": "2026-10-10T14:52:58Z",
    "ok": true
   },
   {
@@ -596,7 +596,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/23ccee80ee542e7cf156a772bb589942.pdf?productCode=C60133",
    "jlc_stock": 6705064,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:17Z",
+   "fetched_utc": "2026-10-10T14:52:59Z",
    "ok": true
   },
   {
@@ -616,7 +616,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C27011",
    "jlc_stock": 6161,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:18Z",
+   "fetched_utc": "2026-10-10T14:53:00Z",
    "ok": true
   },
   {
@@ -631,12 +631,12 @@
    "mpn": "FNR6045S6R8MT",
    "brand": "cjiang",
    "package": "SMD,6x6mm",
-   "lcsc_stock": 590,
+   "lcsc_stock": 640,
    "lcsc_usd_10": 0.113,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/a0b12ba9dfe6b9e66b6bb852b7c71c03.pdf?productCode=C168072",
    "jlc_stock": 594,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:18Z",
+   "fetched_utc": "2026-10-10T14:53:01Z",
    "ok": true
   },
   {
@@ -657,12 +657,12 @@
    "mpn": "CL32A226KAJNNNE",
    "brand": "Samsung Electro-Mechanics",
    "package": "1210",
-   "lcsc_stock": 216818,
+   "lcsc_stock": 216762,
    "lcsc_usd_10": 0.1634,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C52306",
-   "jlc_stock": 278947,
+   "jlc_stock": 278884,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:19Z",
+   "fetched_utc": "2026-10-10T14:53:01Z",
    "ok": true
   },
   {
@@ -682,7 +682,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/6c6fce4367275d84ec6a99bf09f1250f.pdf?productCode=C265101",
    "jlc_stock": 869,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:20Z",
+   "fetched_utc": "2026-10-10T14:53:02Z",
    "ok": true
   },
   {
@@ -702,7 +702,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/f2301bec36461d1ce751d45a4a680a5d.pdf?productCode=C113367",
    "jlc_stock": 13274,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:20Z",
+   "fetched_utc": "2026-10-10T14:53:07Z",
    "ok": true
   },
   {
@@ -722,7 +722,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/2474e9261ed7c5f86b55d373e724589d.pdf?productCode=C295747",
    "jlc_stock": 14361,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:21Z",
+   "fetched_utc": "2026-10-10T14:53:09Z",
    "ok": true
   },
   {
@@ -742,7 +742,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/7d66556bb254f99e058243c7371e051d.pdf?productCode=C5267406",
    "jlc_stock": 7635,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:22Z",
+   "fetched_utc": "2026-10-10T14:53:09Z",
    "ok": true
   },
   {
@@ -761,9 +761,9 @@
    "lcsc_stock": 7330600,
    "lcsc_usd_10": 0.0027,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25900",
-   "jlc_stock": 14600475,
+   "jlc_stock": 14601189,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:42:23Z",
+   "fetched_utc": "2026-10-10T14:53:10Z",
    "ok": true
   },
   {
@@ -783,7 +783,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/00659630c8ad1e2184fc3218d8262faf.pdf?productCode=C160390",
    "jlc_stock": 25177,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:23Z",
+   "fetched_utc": "2026-10-10T14:53:11Z",
    "ok": true
   },
   {
@@ -803,7 +803,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/f42cc89de166d1a84d9a917c44512826.pdf?productCode=C185817",
    "jlc_stock": 89469,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:24Z",
+   "fetched_utc": "2026-10-10T14:53:12Z",
    "ok": true
   },
   {
@@ -821,9 +821,9 @@
    "lcsc_stock": 48589,
    "lcsc_usd_10": 0.638,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/c67b965eb2a01e8d671b6f15d639e314.pdf?productCode=C49851",
-   "jlc_stock": 53180,
+   "jlc_stock": 53150,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:25Z",
+   "fetched_utc": "2026-10-10T14:53:12Z",
    "ok": true
   },
   {
@@ -843,7 +843,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/6f5612c685ffeaea62cc8564d21239f1.pdf?productCode=C2890349",
    "jlc_stock": 8576,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:25Z",
+   "fetched_utc": "2026-10-10T14:53:13Z",
    "ok": true
   },
   {
@@ -863,7 +863,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/7466a2af04454f0896e70eb827692387.pdf?productCode=C87357",
    "jlc_stock": 4093,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:26Z",
+   "fetched_utc": "2026-10-10T14:53:14Z",
    "ok": true
   },
   {
@@ -883,7 +883,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/40dfb6cb4606b2ccaa4e89438a42f563.pdf?productCode=C167218",
    "jlc_stock": 62964,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:27Z",
+   "fetched_utc": "2026-10-10T14:53:15Z",
    "ok": true
   },
   {
@@ -903,7 +903,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/4b6c851584ad23fd00938c1a71f72301.pdf?productCode=C2844238",
    "jlc_stock": 4501,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:27Z",
+   "fetched_utc": "2026-10-10T14:53:15Z",
    "ok": true
   },
   {
@@ -921,9 +921,9 @@
    "lcsc_stock": 0,
    "lcsc_usd_10": 0.0298,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C19666",
-   "jlc_stock": 2210715,
+   "jlc_stock": 2208363,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:42:28Z",
+   "fetched_utc": "2026-10-10T14:53:16Z",
    "ok": true
   },
   {
@@ -943,7 +943,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/09fe2daf22580a99fa7fea93ccb20fb7.pdf?productCode=C82219",
    "jlc_stock": 215795,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:29Z",
+   "fetched_utc": "2026-10-10T14:53:17Z",
    "ok": true
   },
   {
@@ -963,7 +963,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25774",
    "jlc_stock": 207852,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:30Z",
+   "fetched_utc": "2026-10-10T14:53:17Z",
    "ok": true
   },
   {
@@ -983,7 +983,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25755",
    "jlc_stock": 257307,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:30Z",
+   "fetched_utc": "2026-10-10T14:53:18Z",
    "ok": true
   },
   {
@@ -1001,9 +1001,9 @@
    "lcsc_stock": 447700,
    "lcsc_usd_10": 0.0026,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C26083",
-   "jlc_stock": 2224343,
+   "jlc_stock": 2223863,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:42:31Z",
+   "fetched_utc": "2026-10-10T14:53:19Z",
    "ok": true
   },
   {
@@ -1023,7 +1023,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25746",
    "jlc_stock": 52263,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:32Z",
+   "fetched_utc": "2026-10-10T14:53:20Z",
    "ok": true
   },
   {
@@ -1043,7 +1043,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25762",
    "jlc_stock": 483237,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:33Z",
+   "fetched_utc": "2026-10-10T14:53:20Z",
    "ok": true
   },
   {
@@ -1063,7 +1063,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/09fe2daf22580a99fa7fea93ccb20fb7.pdf?productCode=C1542",
    "jlc_stock": 97625,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:42:33Z",
+   "fetched_utc": "2026-10-10T14:53:21Z",
    "ok": true
   }
  ]

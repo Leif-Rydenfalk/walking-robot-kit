@@ -6,7 +6,7 @@ source, its limit, the worst load we can name, and the margin. Margin = 1 - load
 ## 1. The power tree
 
 ```
-2S pack 5.0-8.4 V ── J6 (JST PH, 2 contacts per pole) ── Q2 AON6407 reverse-polarity P-FET
+2S pack 5.0-8.4 V ── J6 (JST PH 6-pin, 3 contacts per pole) ── Q2 AON6407 reverse-polarity P-FET
    └─ R22 5 mOhm shunt (INA226 U8 reads V and I) ── VBAT
         ├─ F2 5 A PTC ── U10 TPS61088 boost ── VIN12 11.86 V ── J1.57 + J1.59 ── UNO Q VIN
         │                                                         (UNO Q makes its own 5 V, 3.3 V, 1.8 V)
@@ -48,7 +48,7 @@ inside the UNO Q's 15 W above and do not add to the hat converters.
 | L1 FNR6045 6.8 uH | 3.3 A | 0.65 A + ripple | **> 70 %** | |
 | R22 shunt 2 W | 2 W | 4.7 A: 0.11 W | **95 %** | INA226 range +-81.92 mV = +-16 A |
 | Q2 AON6407 | 85 A class, < 6 mOhm | 4.7 A: 0.13 W | **> 90 %** | |
-| J6 pack connector, 2 contacts per pole | 4 A (2 A per JST PH contact) | 4.72 A at 5.0 V with UNO Q at 15 W and amp at full | **-18 %** | see 5.2: realistic load is 2.76 A (31 %) |
+| J6 pack connector S6B-PH-SM4-TB, 3 contacts per pole | 6 A (2 A per JST PH contact) | 4.72 A at 5.0 V with UNO Q at 15 W and amp at full | **21 %** | realistic load 2.76 A (54 %). Was 2 per pole (4 A, -18 %) until build #10 |
 | UNO Q +3V3 to hat | UNO Q regulator (inside 15 W) | 360 mA | - | the hat adds no regulator here |
 
 ## 4. Servo power
@@ -69,10 +69,11 @@ streaming, 8 W) needs 2.04 A from the pack at 5.0 V, 49 % under F2's derated hol
 
 ### 5.2 J6 pack connector
 
-The worst-case sum (UNO Q 15 W plus amplifier full) exceeds two JST PH contacts at 5.0 V
-by 18 %. With the realistic 8 W UNO Q load the pack current is 2.04 + 0.72 = 2.76 A, 31 %
-margin. This was true in Rev B too (J6 is unchanged). If the dev kit ever feeds USB loads
-from the UNO Q, move J6 to a 3 A-per-contact connector in Rev D.
+Up to build #9 J6 was a 4-pin PH with two contacts per pole: 4 A, below the 4.72 A worst
+case (UNO Q at 15 W plus the amplifier at full, 5.0 V pack). A kit buyer plugs in whatever
+they have, so build #10 (2026-10-10) made J6 a 6-pin S6B-PH-SM4-TB (C265405) with three
+contacts per pole: 6 A, 21 % over the worst case. The kit ships a J6-to-XT30 pigtail so the
+buyer plugs in a normal 2S pack (see the order sheet).
 
 ## 6. Method
 

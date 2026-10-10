@@ -32,6 +32,9 @@ NOTES = {
     "C23654": ("Same DBV0005A as U5", "PASS"),
     "C265102": ("JST PH SMT S4B-PH-SM4-TB: 1.0x3.5 signal, 1.5x3.4 mount, 2.0 pitch (JST drawing; "
                 "KiCad JST_PH footprint is drawn from it)", "PASS"),
+    "C265405": ("JST PH S6B-PH-SM4-TB (pack in, 3 contacts per pole): 1.0x3.5 signal, 1.5x3.4 "
+                "mount, 2.0 pitch, pins +-5.0, mount pads +-7.35 (JST drawing; KiCad footprint drawn "
+                "from it)", "PASS"),
     "C265101": ("JST PH S3B-PH-SM4-TB, same family as J6", "PASS"),
     "C295747": ("JST PH S2B-PH-SM4-TB, same family as J6", "PASS"),
     "C160390": ("JST SH BM04B-SRSS-TB: 0.6x1.55 signal, 1.2x1.8 mount, 1.0 pitch", "PASS"),

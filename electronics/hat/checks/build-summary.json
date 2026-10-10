@@ -1,7 +1,7 @@
 {
  "bond": {
   "GND": [
-   109,
+   110,
    [
     [
      "J3",
@@ -66,7 +66,7 @@
  "drc": {
   "$schema": "https://schemas.kicad.org/drc.v1.json",
   "coordinate_units": "mm",
-  "date": "2026-10-10T22:43:15",
+  "date": "2026-10-10T22:50:03",
   "ignored_checks": [
    {
     "description": "Footprint has no courtyard defined",
@@ -255,7 +255,7 @@
   "J3": 180
  },
  "routed_rows": 7,
- "seconds": 106.7,
+ "seconds": 98.2,
  "silk_refs_hidden": [
   "C12",
   "C15",
@@ -369,5 +369,5 @@
   "U8",
   "U9"
  ],
- "stitch": 72
+ "stitch": 71
 }

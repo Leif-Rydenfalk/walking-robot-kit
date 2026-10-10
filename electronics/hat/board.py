@@ -366,9 +366,9 @@ def build(place_only=False, do_fab=True):
     # local power copper, each around its own pads, with via clusters into
     # the In2 planes (one bonded via is ~1 A on JLC's 0.5 oz inner copper)
     local = [
-        ("VBAT_IN", "B.Cu", [(43.6, 34.0), (48.6, 34.0), (48.6, 41.8), (44.2, 41.8),
-                             (44.2, 46.8), (39.8, 46.8), (39.8, 41.0), (43.6, 41.0)],
-         "pack pins 1-2 to Q2 drain", []),
+        ("VBAT_IN", "B.Cu", [(43.6, 34.0), (48.6, 34.0), (48.6, 41.8), (44.25, 41.8),
+                             (44.25, 46.8), (38.75, 46.8), (38.75, 41.0), (43.6, 41.0)],
+         "pack pins 1-3 to Q2 drain", []),
         ("VBAT_F", "B.Cu", [(54.4, 26.0), (60.0, 26.0), (60.0, 37.6), (52.2, 37.6),
                             (52.2, 34.6), (54.4, 34.6)],
          "PTC to TPS62933 VIN and its capacitors", []),

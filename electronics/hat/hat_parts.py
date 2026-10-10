@@ -191,10 +191,13 @@ PARTS = [
     ("C20", "Device:C", C0402, "100nF", "C1525", "bottom", (52.4, 15.0), 90, True, "U5 VCC"),
     ("C21", "Device:C", C0402, "100nF", "C1525", "bottom", (52.4, 10.5), 90, True, "U6 VCC"),
     # --- power: 2S pack -> reverse FET -> PTC -> TPS62933 -> 5V_SYS -----------
-    ("J6", "Connector_Generic_MountingPin:Conn_01x04_MountingPin",
-     "Connector_JST:JST_PH_S4B-PH-SM4-TB_1x04-1MP_P2.00mm_Horizontal",
-     "S4B-PH-SM4-TB 2S pack in", "C265102", "bottom", (44.0, 47.6), 0, True,
-     "1 2 VBAT, 3 4 GND"),
+    # rev C 2026-10-10: 6 pins, 3 per pole. Two PH contacts (4 A) were below the
+    # 4.7 A worst case (UNO Q at its 15 W limit + amp at full, 5.0 V pack);
+    # three are 6 A. Same JST PH family and crimp, so the kit harness stays PH.
+    ("J6", "Connector_Generic_MountingPin:Conn_01x06_MountingPin",
+     "Connector_JST:JST_PH_S6B-PH-SM4-TB_1x06-1MP_P2.00mm_Horizontal",
+     "S6B-PH-SM4-TB 2S pack in", "C265405", "bottom", (44.5, 47.6), 0, True,
+     "1 2 3 VBAT, 4 5 6 GND"),
     ("Q2", "Transistor_FET:Si7141DP", "Package_SO:PowerPAK_SO-8_Single",
      "AON6407 reverse-polarity P-FET", "C13899", "bottom", (44.5, 36.5), 0, True,
      "D from pack, S to load, G to GND"),
@@ -369,7 +372,7 @@ NETS = {
             + ["U1.2", "C1.2", "C2.2", "C3.2", "C4.2", "U2.12", "U2.21", "C5.2",
                "J4.1", "J4.MP", "J8.2", "J8.MP", "C19.2",
                "U5.3", "U6.3", "D1.2", "R16.2", "R19.2", "C20.2", "C21.2",
-               "J6.3", "J6.4", "J6.MP", "R11.2", "U3.4", "C6.2", "C7.2", "C8.2",
+               "J6.4", "J6.5", "J6.6", "J6.MP", "R11.2", "U3.4", "C6.2", "C7.2", "C8.2",
                "C10.2", "R13.2", "C11.2", "C12.2", "J5.3", "J5.MP",
                "U4.7", "R9.2", "C13.2", "C16.2", "J7.MP", "TP5.1",
                # rev B
@@ -430,7 +433,7 @@ NETS = {
     "SERVO_PULLUP": ["D40.1", "R15.2", "R21.2"],
     "SERVO_DATA": ["J5.1", "R20.2", "D1.1", "TP4.1"],
     # power
-    "VBAT_IN": ["J6.1", "J6.2", "Q2.5"],
+    "VBAT_IN": ["J6.1", "J6.2", "J6.3", "Q2.5"],
     # rev B: the shunt sits between the FET and everything it feeds, so the
     # INA226 sees the converter and the servos together. Q2 source is at
     # x 41.83 and R22 pad 2 at x 38.96, a 2.9 mm hop (measured 2026-10-04).

@@ -11,7 +11,9 @@ everything the robot needs that the UNO Q does not have.
 | block | part | notes |
 |---|---|---|
 | camera | 22-pin 0.5 mm flex connector on CSI0 | takes an IMX219 module. The ten CSI0 tracks are Arduino's own, copied from the UNO Media Carrier and length matched by them |
-| power in | reverse-polarity FET, PTC, TPS62933 buck to 5 V | 5.0 to 8.4 V in. Above that the daemon refuses to torque anything |
+| power in | 6-pin JST PH pack plug (3 contacts per pole, 6 A), reverse-polarity FET, then two paths | 5.0 to 8.4 V in. Above that the daemon refuses to torque anything |
+| UNO Q supply | TPS61088 boost to 11.86 V into the UNO Q's own VIN (7-24 V) | rev C. The hat never touches the UNO Q's 5 V or USB VBUS |
+| amplifier supply | PTC, TPS62933 buck to 5 V | feeds only the amplifier |
 | servo bus | half-duplex TTL with automatic direction | one 3-pin plug, the chain daisy-chains from there. Serial1, D0 and D1, 1 Mbit/s |
 | pack monitor | INA226 across a 5 mOhm shunt in the pack feed | pack voltage and current |
 | inertial | LSM6DSV16X on the 3.3 V bus at 0x6B | six axes with on-chip fusion |
@@ -27,8 +29,12 @@ the bottom side, so nothing fouls the UNO Q above it.
 ### Getting one made
 
 Send `hat/fab/gerbers.zip` to a PCB maker. Four layers, 1.6 mm, ENIG. Smallest
-via is 0.25 mm drill on a 0.45 mm pad. For assembled boards add `fab/bom.csv`
+via is 0.20 mm drill on a 0.40 mm pad (one, inside the IMU's LGA); the rest are
+0.25/0.45. For assembled boards add `fab/bom.csv`
 and `fab/cpl.csv`; the part numbers are LCSC.
+The order, with options, price and checks: `../docs/PCB-ORDER-LEIF-2026-10-11.md`.
+Checks behind it: `hat/checks/` and `hat/docs/` (footprints, strap pins, power
+budget, BOM stock).
 
 `hat/schematic.pdf` is the circuit. `hat/kicad/` is the KiCad 10 project.
 

@@ -14,6 +14,10 @@ sensor, the pack monitor and the foot contacts.
 Servo power does not come from the board. Give the chain its own supply between
 5.0 and 8.4 V and share the ground with the board.
 
+The hat takes the 2S pack on J6, a 6-pin JST PH: pins 1-3 are pack +, 4-6 are
+ground. The kit's lead goes from J6 to an XT30. Do not feed servo current
+through J5; its pin 2 is a pack-voltage reference with a 2 A contact.
+
 ## The inertial sensor
 
 The hat carries an LSM6DSV16X at 0x6B and you do not have to wire anything.
