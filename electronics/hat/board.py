@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""board.py - the the robot UNO Q head hat, rev B, four layers.
+"""board.py - the the robot UNO Q head hat, rev C, four layers.
 
     ce-pcb/bin/pcb electronics/unoq-hat/board.py              build, route, DRC, fab
     ce-pcb/bin/pcb electronics/unoq-hat/board.py --place-only  parts only, for a look
@@ -101,7 +101,7 @@ def net_all(b, name, *pins):
 
 def copy_csi0(b):
     """Arduino's CSI0 copper, translated. Returns (segments, arcs, vias)."""
-    d = json.load(open(os.path.join(OUT, "carrier-csi0.json")))
+    d = json.load(open(os.path.join(HERE, "data", "carrier-csi0.json")))
     lay = {"TOP": pcbnew.F_Cu, "BOTTOM": pcbnew.B_Cu}
     ns = na = 0
 
@@ -199,13 +199,94 @@ def pinch_copper(b):
     b.track("GND", [j, jv], width=0.2, layer="B.Cu")
     b.via("GND", jv, drill=0.25, size=0.45)
     made.append("GND J3.19 via %s" % (jv,))
+    made += pinch_boost(b)
+    # rev C: J1.26 and J2.26 (GND, inner rows) were left unconnected by the
+    # 2026-10-10 builds; F.Cu GND cannot reach them between the header pads.
+    # A via in the channel between each header's two rows, where F.Cu has no
+    # pad at any y, takes them to In1.
+    # J2's via steps 1 mm south along the channel: straight across, it sat
+    # 0.1 mm from C7 pad 1 on B.Cu (DRC 2026-10-10 22:30 CST).
+    for pin, other, dy in (("J1.26", "J1.25", 0.0), ("J2.26", "J2.25", -1.0)):
+        p, q = b.pad_xy(pin), b.pad_xy(other)
+        x = round((p[0] + q[0]) / 2.0, 3)
+        v = (x, round(p[1] + dy, 3))
+        b.track("GND", [p, (x, p[1]), v] if dy else [p, v], width=0.25, layer="F.Cu")
+        b.via("GND", v, drill=0.25, size=0.45)
+        made.append("GND %s via %s" % (pin, v))
+    # that via took the spot bond() used for C7's GND pad (DRC 22:40 CST
+    # left C7.2 unconnected), so C7.2 joins it on B.Cu
+    b.track("GND", [v, b.pad_xy("C7.2")], width=0.3, layer="B.Cu")
     return made
+
+
+def pinch_boost(b):
+    """Rev C: copper the router could not lay round U10 (TPS61088), from pad
+    positions. Build 2026-10-10 21:50 CST left BST_FB, BST_COMP and BST_FSW
+    open ("search budget exhausted"), and the stock ThermalVias footprint put
+    its exposed-pad vias through to F.Cu under J1 pads 5 and 9 (DRC
+    clearance + mask bridge). U10 sits under J1's two pad rows, so:
+      * the EP gets its own GND vias in the 1.7 mm channel between J1's rows
+        (x 10.83-12.53), where F.Cu has no J1 pad at any y;
+      * GND pins 11, 12 and 20 join the EP with short stubs;
+      * FB, COMP and ILIM leave the west row in three columns heading north to
+        R32, R34 and R31; FSW leaves the east row north to R30."""
+    made = []
+    # pad "21" is five pads in this footprint (the EP and four corner tabs);
+    # its centre is the middle of the four corner pins instead
+    cs = [b.pad_xy(q) for q in ("U10.2", "U10.9", "U10.12", "U10.19")]
+    ep = (sum(c[0] for c in cs) / 4.0, sum(c[1] for c in cs) / 4.0)
+    xch = round((b.pad_xy("J1.2")[0] + b.pad_xy("J1.1")[0]) / 2.0, 3)
+    for dy in (-1.05, -0.35, 0.35, 1.05):
+        b.via("GND", (xch, round(ep[1] + dy, 3)), drill=0.25, size=0.45)
+    made.append("U10 EP 4 vias at x %.3f" % xch)
+    for pin in ("U10.11", "U10.20"):
+        p = b.pad_xy(pin)
+        b.track("GND", [p, (p[0], ep[1] + (0.9 if p[1] > ep[1] else -0.9))],
+                width=0.25, layer="B.Cu")
+    p12, p11 = b.pad_xy("U10.12"), b.pad_xy("U10.11")
+    b.track("GND", [p12, (p11[0], p12[1])], width=0.25, layer="B.Cu")
+    made.append("U10 GND pins 11/12/20 to EP")
+    for pin, dest, col in (("U10.17", "R32.2", 9.35), ("U10.18", "R34.1", 9.8),
+                           ("U10.19", "R31.1", 10.25)):
+        p, d = b.pad_xy(pin), b.pad_xy(dest)
+        net = {"U10.17": "BST_FB", "U10.18": "BST_COMP", "U10.19": "BST_ILIM"}[pin]
+        b.track(net, [p, (col, p[1]), (col, d[1] - 0.6 if d[1] > p[1] else d[1] + 0.6), d],
+                width=0.15, layer="B.Cu")
+        made.append("%s %s->%s col x %.2f" % (net, pin, dest, col))
+    p, d = b.pad_xy("U10.3"), b.pad_xy("R30.1")
+    b.track("BST_FSW", [p, (14.9, p[1]), (14.9, d[1] - 0.6), d], width=0.15, layer="B.Cu")
+    made.append("BST_FSW U10.3->R30.1")
+    # EN leaves pin 2 east, runs north in the 0.5 mm gap between C33 and the
+    # FSW column, and meets the R36/R35 divider on one horizontal
+    p, lo, hi = b.pad_xy("U10.2"), b.pad_xy("R36.2"), b.pad_xy("R35.1")
+    b.track("BST_EN", [p, (14.56, p[1]), (14.56, lo[1])], width=0.127, layer="B.Cu")
+    b.track("BST_EN", [lo, hi], width=0.127, layer="B.Cu")
+    made.append("BST_EN U10.2->R36/R35 col x 14.56")
+    return made
+
+
+def drop_one_layer_vias(b, where=(("CCI_SCL", 26.1775, 23.56),)):
+    """Remove the via KiCad DRC flags via_dangling, named by net and position.
+
+    Rev C 2026-10-10: U7.13's inward-fanout via (CCI_SCL) ended up with tracks
+    on B.Cu only, because the router took B.Cu out of the LGA instead. A
+    general "tracks on one layer" test also caught 10 vias KiCad counts as
+    connected (track ends inside the via ring, not on its centre), so this
+    removes only the via the DRC report names (raw KiCad mm)."""
+    gone = []
+    for v in [t for t in b._pcb.GetTracks() if t.GetClass() == "PCB_VIA"]:
+        c = v.GetPosition()
+        for net, x, y in where:
+            if v.GetNetname() == net and abs(c.x / 1e6 - x) < 0.02 and abs(c.y / 1e6 - y) < 0.02:
+                gone.append((net, x, y))
+                b._pcb.Remove(v)
+    return gone
 
 
 def build(place_only=False, do_fab=True):
     os.makedirs(OUT, exist_ok=True)
     t0 = time.time()
-    b = Board(NAME, outline=OUTLINE, layers=4, title="the robot UNO Q head hat rev B")
+    b = Board(NAME, outline=OUTLINE, layers=4, title="the robot UNO Q head hat rev C")
     b.thickness(1.6, why="JLCPCB 4-layer default and the carrier's 1.606 mm")
     b.rules(clearance=0.127, track=0.127, via=0.45, via_drill=0.25,
             min_via=0.40, min_hole=0.20,
@@ -246,7 +327,8 @@ def build(place_only=False, do_fab=True):
     # net classes
     b.netclass("CSI", [n for n in P.NETS if n.startswith("CSI0_")], 0.127, 0.18,
                why="Arduino's own width, kept with Arduino's copper")
-    b.netclass("POWER", ["V5", "VBAT", "VBAT_IN", "VBAT_FET", "VBAT_F", "SW"], 0.2, 0.8,
+    b.netclass("POWER", ["V5", "VBAT", "VBAT_IN", "VBAT_FET", "VBAT_F", "SW",
+                        "VIN12", "VBAT_B", "SW2"], 0.2, 0.8,
                why="3 A at 5 V and the servo feed; planes carry the length, "
                    "0.8 mm is the neck between pad and plane")
     b.netclass("RAIL", ["+3V3", "+1V8"], 0.127, 0.3,
@@ -265,12 +347,15 @@ def build(place_only=False, do_fab=True):
     b.pour("GND", "In1.Cu", why="solid ground under everything; CSI0 reference")
     zg = b.pour("GND", "In2.Cu", why="ground on In2 wherever no power plane is")
     zv = b.pour("V5", "In2.Cu", outline=rect(33.5, 6.0, 66.0, 33.4),
-                why="5 V from L1/C11/C12 to JMISC 54/56 and the amplifier")
+                why="5 V from L1/C11/C12 to the amplifier (rev C: JMISC 54/56 left open)")
     # rev B: the west step moved from x 33.5 to x 30.5 so the plane reaches
     # under R22's low-side pad, which is where the pack current now enters it.
     # In2 is GND wherever this is not, and In1 is solid GND, so the 3 mm the
     # plane takes costs no return path.
-    zb = b.pour("VBAT", "In2.Cu", outline=[(24.0, 40.0), (30.5, 40.0), (30.5, 34.4),
+    # rev C: the step goes on west to x 27.3 so F2's pack-side pad (x 28.4,
+    # y 35.3) has VBAT under it on In2 (build 2026-10-10 22:20 CST flagged its
+    # via dangling with only B.Cu VBAT copper).
+    zb = b.pour("VBAT", "In2.Cu", outline=[(24.0, 40.0), (27.3, 40.0), (27.3, 34.4),
                                           (66.0, 34.4), (66.0, 40.0), (65.0, 41.0),
                                           (65.0, 51.0), (24.0, 51.0)],
                 why="pack after the reverse FET and the sense shunt: servo "
@@ -311,8 +396,26 @@ def build(place_only=False, do_fab=True):
          [(30.0, 40.2), (30.0, 41.2), (30.0, 42.2)]),
         ("V5", "B.Cu", rect(37.0, 22.0, 43.9, 32.5), "L1 output and C11/C12 into the V5 plane",
          [(41.0, 24.5), (41.0, 25.5), (41.0, 30.0), (41.0, 31.0)]),
-        ("V5", "F.Cu", rect(56.5, 10.2, 59.2, 12.7), "JMISC 54/56 5V_SYS into the V5 plane",
-         [(58.6, 10.5), (58.6, 11.4), (58.6, 12.3)]),
+        # rev C boost, north-west corner of the bottom side. In1 stays solid
+        # GND under it and In2 is GND here, so the hot loop has its return
+        # right below.
+        ("VBAT", "B.Cu", rect(27.3, 33.4, 29.2, 41.8), "pack to F2, into the VBAT plane",
+         [(27.9, 40.9), (28.8, 40.9)]),
+        ("VBAT_B", "B.Cu", [(21.4, 33.4), (25.2, 33.4), (25.2, 37.3), (24.6, 37.3),
+                            (24.6, 46.6), (17.6, 46.6), (17.6, 44.9), (21.4, 44.9)],
+         "F2 to L2 and the boost input capacitors", []),
+        ("SW2", "B.Cu", rect(13.85, 40.0, 17.0, 42.0), "U10 SW pins to L2", []),
+        # frame y is y-up; VOUT pins 14-16 sit at x 10.85, y 40.2-41.3 after
+        # U10's 180 turn. North of them FB, COMP and ILIM leave west into
+        # three hand-laid columns (x 9.35, 9.8, 10.25, see pinch_copper), so
+        # the plane steps west to x 8.6 there and reaches C37 and R32.1.
+        ("VIN12", "B.Cu", [(8.7, 7.8), (12.3, 7.8), (12.3, 30.0), (11.6, 30.0),
+                           (11.6, 38.0), (11.3, 38.0), (11.3, 41.45), (8.6, 41.45),
+                           (8.6, 44.3), (8.05, 44.3), (8.05, 45.35), (7.45, 45.35),
+                           (7.45, 40.0), (8.7, 40.0)],
+         "U10 VOUT and C37-C39 up to JMEDIA 57/59", []),
+        ("VIN12", "F.Cu", rect(11.1, 7.55, 15.4, 10.1), "JMEDIA 57/59 (UNO Q VIN)",
+         [(11.68, 8.45), (11.68, 9.35)]),
     ]
     for net, layer, poly, why, vias in local:
         z = b.pour(net, layer, outline=poly, why=why)
@@ -353,6 +456,10 @@ def build(place_only=False, do_fab=True):
     plan.add(Class("RAIL", ["+3V3", "+1V8"], 0.3, why="camera, ToF and logic supply"))
     plan.add(Class("BUS", ["SERVO_DATA", "DATA_BUF", "SPK_P", "SPK_N", "BST"], 0.3,
                    why="servo bus and speaker"))
+    plan.add(Class("BOOST", ["VBAT_B", "SW2", "VIN12", "BST_BOOT", "BST_FSW",
+                             "BST_VCC", "BST_EN", "BST_SS", "BST_FB", "BST_COMP",
+                             "BST_COMPRC", "BST_ILIM", "SERVO_PULLUP"], 0.25,
+                   why="rev C boost: 0.5 mm pitch VQFN pins; the pours carry the current"))
     plan.add(Class("FIRST", ["CAM_IO1", "TOF_INT", "IMU_INT1", "INA_ALERT"], 0.15,
                    why="signals that lose the race for a pin row: J3.18 and J2.14 on "
                        "2026-10-03, and on 2026-10-04 the IMU and pack-monitor "
@@ -404,6 +511,15 @@ def build(place_only=False, do_fab=True):
         plan.finish(width=0.127, why="last pass at the rule minimum", skip=skip)
     stage('repair+finish done, %d open' % len(plan.open_joins()))
     pruned = plan.prune_dangling(why="stubs that end in their own track")
+    try:
+        lone = drop_one_layer_vias(b)
+    except Exception as e:      # noqa: BLE001 - keep the board, say why
+        import traceback
+        stage('one-layer via pass failed: %s' % traceback.format_exc().replace("\n", " | "))
+        lone = []
+    if lone:
+        pruned += plan.prune_dangling(why="stubs left by a via that reached one layer")
+    stage('one-layer vias removed: %s' % lone)
     isl = [plan.stitch_islands("GND", lay, why="an unstitched ground island is not ground")
            for lay in ("F.Cu", "B.Cu")]
 

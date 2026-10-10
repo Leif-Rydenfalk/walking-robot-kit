@@ -1,4 +1,17 @@
-"""hat_parts.py - the UNO Q head hat as ONE table: parts, nets, positions.
+"""hat_parts.py - the UNO Q head hat as ONE table: parts, nets, positions. REV C.
+
+Rev C (2026-10-10, foreman/microduck-assembly.60) fixes the three Rev B faults
+found by the 2026-10-07 interface audit (HOLD.md):
+  1. IMU_INT1, EXP_INT and INA_ALERT drove 3.3 V into 1.8 V SoC pins
+     J2.37/39/41. They now land on MCU pins J2.3 PC7, J2.7 PC9, J2.9 PE4,
+     3.3 V domain (datasheet ABX00162 sec. 9, JMISC table).
+  2. The TPS62933 drove JMISC 54/56, which Arduino's schematic shows on USB
+     VBUS ahead of D2801. The hat no longer touches JMISC 54/56. A TPS61088
+     boost makes 11.9 V from the 2S pack and feeds the UNO Q's own 7-24 V VIN
+     input (JMEDIA 57/59), where Arduino's buck and Schottky OR it with USB-C.
+     The TPS62933 now feeds only the hat's own 5 V (the amplifier).
+  3. The servo bus pull-ups (R15, R21) hung on +3V3 and back-fed it from a
+     powered bus. D40 (BAT54H) now isolates them.
 
 Read by `sch.py` (the schematic, system python) and `board.py` (the copper,
 KiCad's python). This file IS the design; neither script adds a connection.
@@ -67,6 +80,36 @@ LOCAL_SYMBOLS = {
             ("1", "Q", "output", "right"),
             ("5", "VDD", "power_in", "right"),
             ("2", "VSS", "power_in", "right"),
+        ]),
+
+    "TPS61088": dict(
+        ref_prefix="U",
+        cite=("TI TPS61088 datasheet ZHCSDP8A (May 2015), section 6 Pin "
+              "Configuration and Functions, RHL VQFN-20, read 2026-10-10 from "
+              "the LCSC datasheet for C87357"),
+        description="10 A synchronous boost, 2.7-12 V in, 4.5-12.6 V out",
+        pins=[
+            ("9", "VIN", "power_in", "left"),
+            ("2", "EN", "input", "left"),
+            ("3", "FSW", "input", "left"),
+            ("10", "SS", "passive", "left"),
+            ("13", "MODE", "input", "left"),
+            ("1", "VCC", "power_out", "left"),
+            ("20", "AGND", "power_in", "left"),
+            ("21", "PGND", "power_in", "left"),
+            ("11", "NC", "passive", "left"),
+            ("12", "NC", "passive", "left"),
+            ("4", "SW", "passive", "right"),
+            ("5", "SW", "passive", "right"),
+            ("6", "SW", "passive", "right"),
+            ("7", "SW", "passive", "right"),
+            ("8", "BOOT", "passive", "right"),
+            ("14", "VOUT", "power_out", "right"),
+            ("15", "VOUT", "passive", "right"),
+            ("16", "VOUT", "passive", "right"),
+            ("17", "FB", "input", "right"),
+            ("18", "COMP", "passive", "right"),
+            ("19", "ILIM", "passive", "right"),
         ]),
 }
 
@@ -142,6 +185,9 @@ PARTS = [
     ("R21", "Device:R", R0402, "1k", "C106235", "bottom", (46.4, 18.6), 0, True, "bus pull-up, FITTED (rev B lesson)"),
     ("D1", "Diode:BZT52Bxx", "Diode_SMD:D_SOD-323", "BZT52C5V1S", "C151348",
      "bottom", (55.5, 19.0), 0, True, "bus clamp"),
+    ("D40", "Device:D_Schottky", "unoq_hat:BAT54H_Nexperia_SOD123F", "BAT54H,115",
+     "C426769", "bottom", (50.5, 21.0), 0, True,
+     "rev C: K=1 feeds R15/R21 only, A=2 on +3V3, so a powered servo bus cannot back-feed the UNO Q rail"),
     ("C20", "Device:C", C0402, "100nF", "C1525", "bottom", (52.4, 15.0), 90, True, "U5 VCC"),
     ("C21", "Device:C", C0402, "100nF", "C1525", "bottom", (52.4, 10.5), 90, True, "U6 VCC"),
     # --- power: 2S pack -> reverse FET -> PTC -> TPS62933 -> 5V_SYS -----------
@@ -205,9 +251,9 @@ PARTS = [
      "head IMU, I2C 0x6B on CCI0; SFLP gives gravity + game rotation vector in hardware"),
     ("C22", "Device:C", C0402, "100nF", "C1525", "bottom", (23.0, 30.0), 0, True, "U7 Vdd_IO"),
     ("C23", "Device:C", C0402, "100nF", "C1525", "bottom", (29.0, 30.0), 0, True, "U7 Vdd"),
-    ("R27", "Device:R", R0402, "4.7k", "C25900", "bottom", (26.0, 33.2), 0, True,
+    ("R27", "Device:R", R0402, "4.7k", "C25900", "bottom", (23.0, 31.3), 0, True,
      "CCI0 SDA pull-up: the bus now leaves the board to the trunk IMU"),
-    ("R28", "Device:R", R0402, "4.7k", "C25900", "bottom", (26.0, 34.4), 0, True, "CCI0 SCL pull-up"),
+    ("R28", "Device:R", R0402, "4.7k", "C25900", "bottom", (23.0, 32.4), 0, True, "CCI0 SCL pull-up"),
     ("J12", "Connector_Generic_MountingPin:Conn_01x04_MountingPin", SH4V,
      "BM04B-SRSS-TB trunk IMU I2C", "C160390", "bottom", (6.0, 30.0), 90, True,
      "1 GND 2 3V3 3 SDA 4 SCL to the trunk IMU board (0x6A)"),
@@ -247,8 +293,56 @@ PARTS = [
      "FOOT_L pull-up, at the expander it feeds"),
     ("R26", "Device:R", R0402, "10k", "C25744", "bottom", (45.0, 21.0), 0, True,
      "FOOT_R pull-up, at the expander it feeds"),
+    # --- rev C: 2S pack -> F2 -> TPS61088 boost 11.9 V -> UNO Q VIN (JMEDIA 57/59) --
+    # In the free north-west corner of the bottom side (B.Cu was empty there in
+    # rev B, measured 2026-10-10 from kicad/unoq_hat.kicad_pcb). Values from
+    # TPS61088 datasheet sec. 9.2.2 and the TPS61088EVM-677 BOM (SLVUAF2):
+    #   VOUT = 1.204 * (1 + 1M/113k) = 11.86 V      (EVM table 2, 12 V row)
+    #   fsw  ~ 530 kHz with RFREQ 300k at 6-8.4 V in (eq. 2, CFREQ 23 pF, tDELAY 89 ns)
+    #   ILIM = 1190000 / 150k = 7.9 A typ, 6.6 A worst (eq. 3, PFM, -1.3 A)
+    #   peak inductor current at 5.5 V in, 18 W out, 90 %: 3.64 A DC + 1.28 A = 4.9 A
+    #   COMP 18k + 6.8 nF for fc 10 kHz (eq. 18, 19; Co 36 uF effective)
+    #   SS 47 nF -> 11 ms ramp (eq. 1)
+    # Bottom side: at rot 0 a two-pad part's pad 1 lands WEST and U10's SW row
+    # lands west (measured with padcheck on the placed board, 2026-10-10), so
+    # U10, L2, F2 and C37-C39 are turned 180 to put SW toward L2, VOUT toward
+    # C37-C39 and pad 1 of each into its pour.
+    ("U10", "local:TPS61088", "Package_DFN_QFN:Texas_VQFN-RHL-20",
+     "TPS61088RHLR", "C87357", "bottom", (12.5, 41.0), 180, True,
+     "boost for UNO Q VIN; EN tied to VCC (abs max 7 V), MODE floating = PFM at light load"),
+    ("L2", "Device:L", "Inductor_SMD:L_Changjiang_FXL0630", "FXL0630-2R2-M 2.2uH",
+     "C167218", "bottom", (19.8, 41.0), 180, True, "Isat above the 7.9 A typ switch limit"),
+    # 5 A hold: the UNO Q may draw 3 A at 5 V (datasheet sec. 3.1), which is
+    # 3.3 A out of an empty 6.0 V pack after both converters; a 3 A PTC would
+    # sit in its trip band there.
+    ("F2", "Device:Fuse", "Fuse:Fuse_1812_4532Metric", "JK-MSMD500L-12V 5A PTC",
+     "C2844238", "bottom", (26.3, 35.3), 180, True,
+     "boost feed; a boost has no output disconnect, so a VIN short is stopped here"),
+    ("C30", "Device:C", C1210, "22uF 25V", "C52306", "bottom", (19.4, 47.2), 270, True, "boost VIN bulk"),
+    ("C31", "Device:C", C1210, "22uF 25V", "C52306", "bottom", (22.7, 47.2), 90, True, "boost VIN bulk"),
+    ("C32", "Device:C", C0402, "100nF 25V", "C105883", "bottom", (15.1, 37.0), 90, True, "U10 VIN HF"),
+    ("C33", "Device:C", "Capacitor_SMD:C_0603_1608Metric", "4.7uF 16V", "C19666",
+     "bottom", (12.8, 45.1), 0, True, "U10 VCC LDO (>1 uF)"),
+    ("C34", "Device:C", C0402, "100nF 25V", "C105883", "bottom", (16.8, 36.0), 0, True, "U10 BOOT-SW"),
+    ("C35", "Device:C", C0402, "47nF", "C82219", "bottom", (13.0, 36.6), 0, True, "U10 soft start"),
+    ("R30", "Device:R", R0402, "300k", "C25774", "bottom", (15.8, 45.2), 0, True, "U10 FSW-SW, ~530 kHz"),
+    ("R31", "Device:R", R0402, "150k", "C25755", "bottom", (10.5, 44.8), 270, True, "U10 ILIM, 7.9 A typ"),
+    ("R32", "Device:R", R0402, "1M", "C26083", "bottom", (8.1, 45.1), 0, True, "U10 FB top"),
+    ("R33", "Device:R", R0402, "113k", "C25746", "bottom", (8.1, 46.3), 0, True, "U10 FB bottom: 11.86 V"),
+    ("R34", "Device:R", R0402, "18k", "C25762", "bottom", (9.55, 46.5), 270, True, "U10 COMP R"),
+    # EN: VCC is the output of an LDO that the EN pin itself turns on (TPS61088
+    # block diagram: LDO under "Shutdown"; ISD 1 uA), so EN tied to VCC never
+    # starts. EN is rated 7 V abs max and the pack reaches 8.4 V: a 1:1 divider
+    # gives 2.5 V at 5.0 V (VENH 1.2 V) and 4.2 V at 8.4 V. 42 uA at full pack.
+    ("R35", "Device:R", R0402, "100k", "C25741", "bottom", (16.3, 46.55), 0, True, "U10 EN divider top (VBAT_B)"),
+    ("R36", "Device:R", R0402, "100k", "C25741", "bottom", (13.4, 46.55), 0, True, "U10 EN divider bottom"),
+    ("C36", "Device:C", C0402, "6.8nF", "C1542", "bottom", (9.55, 48.4), 270, True, "U10 COMP C"),
+    ("C37", "Device:C", C1210, "22uF 25V", "C52306", "bottom", (7.0, 42.6), 180, True, "boost VOUT"),
+    ("C38", "Device:C", C1210, "22uF 25V", "C52306", "bottom", (7.0, 39.3), 180, True, "boost VOUT"),
+    ("C39", "Device:C", C1210, "22uF 25V", "C52306", "bottom", (7.0, 36.0), 180, True, "boost VOUT"),
+    ("TP7", "Connector:TestPoint", TP, "VIN12", "", "bottom", (10.2, 20.0), 0, True, "UNO Q VIN"),
     # --- test points and holes (not in the BOM) ---------------------------------
-    ("TP1", "Connector:TestPoint", TP, "MCLK0", "", "bottom", (21.0, 36.0), 0, True, "SoC camera clock, 1.8 V"),
+    ("TP1", "Connector:TestPoint", TP, "MCLK0", "", "bottom", (20.5, 32.8), 0, True, "SoC camera clock, 1.8 V"),
     ("TP2", "Connector:TestPoint", TP, "V5", "", "bottom", (35.5, 25.0), 0, True, ""),
     ("TP3", "Connector:TestPoint", TP, "VBAT", "", "bottom", (49.5, 40.5), 0, True, ""),
     ("TP4", "Connector:TestPoint", TP, "BUS", "", "bottom", (58.5, 19.0), 0, True, ""),
@@ -283,18 +377,22 @@ NETS = {
                "J12.1", "J12.MP",
                "U8.1", "U8.2", "U8.7", "C26.2",
                "U9.2", "U9.4", "U9.6", "C25.2", "C24.2",
-               "J9.2", "J9.MP", "J10.2", "J10.MP", "J11.2", "J11.MP"]),
+               "J9.2", "J9.MP", "J10.2", "J10.MP", "J11.2", "J11.MP",
+               # rev C boost
+               "U10.11", "U10.12", "U10.20", "U10.21", "R36.1", "C30.2", "C31.1", "C32.2",
+               "C33.2", "C35.2", "R31.2", "R33.2", "C36.2", "C37.2", "C38.2", "C39.2"]),
     "+3V3": (_p("J1", 58, 60) + _p("J2", 53, 55)
              + ["J3.22", "U1.7", "C3.1", "C4.1", "U2.24", "U2.2", "U2.3", "C5.1",
                 "R2.2", "J4.2", "R7.2", "R8.2",
-                "U5.5", "U6.5", "Q1.2", "R15.2", "R17.2", "R21.2", "C20.1", "C21.1",
+                "U5.5", "U6.5", "Q1.2", "D40.2", "R17.2", "C20.1", "C21.1",
                 # rev B
                 "U7.1", "U7.5", "U7.8", "U7.12", "C22.1", "C23.1",
                 "R27.2", "R28.2", "J12.2",
                 "U8.6", "C26.1", "R29.2",
                 "U9.5", "C25.1", "R25.2", "R26.2"]),
     "+1V8": ["J2.57", "U1.3", "R1.2", "C2.1"],
-    "V5": ["J2.54", "J2.56", "L1.2", "C11.1", "C12.1", "R12.1", "U4.6", "C13.1",
+    # rev C: JMISC 54/56 are left open. The hat's 5 V feeds only the amplifier.
+    "V5": ["L1.2", "C11.1", "C12.1", "R12.1", "U4.6", "C13.1",
            "C16.1", "TP2.1"],
     # camera: CSI0 exactly as the carrier, CCI0 through U1
     "CSI0_D0_N": ["J1.21", "J3.2"], "CSI0_D0_P": ["J1.23", "J3.3"],
@@ -310,7 +408,7 @@ NETS = {
     "CCI_SDA": ["U1.1", "J3.21", "U2.23", "R3.1", "U7.14", "U8.4", "R27.1", "J12.3"],
     "CAM_EN": ["U2.4", "J3.17"],
     "CAM_IO1": ["U2.5", "J3.18"],
-    "EXP_INT": ["U2.1", "R2.1", "TP6.1", "J2.39"],
+    "EXP_INT": ["U2.1", "R2.1", "TP6.1", "J2.7"],
     # ToF
     "TOF_SDA": ["J4.3", "R3.2", "R5.2"],
     "TOF_SCL": ["J4.4", "R4.2", "R6.2"],
@@ -329,6 +427,7 @@ NETS = {
     "TXEN_AUTO": ["JP1.1", "Q1.3", "R19.1"],
     "Q1_B": ["Q1.1", "R18.2"],
     "DATA_BUF": ["U5.4", "U6.2", "R20.1", "R15.1", "R21.1"],
+    "SERVO_PULLUP": ["D40.1", "R15.2", "R21.2"],
     "SERVO_DATA": ["J5.1", "R20.2", "D1.1", "TP4.1"],
     # power
     "VBAT_IN": ["J6.1", "J6.2", "Q2.5"],
@@ -336,7 +435,21 @@ NETS = {
     # INA226 sees the converter and the servos together. Q2 source is at
     # x 41.83 and R22 pad 2 at x 38.96, a 2.9 mm hop (measured 2026-10-04).
     "VBAT_FET": ["Q2.1", "Q2.2", "Q2.3", "R22.2", "U8.10"],
-    "VBAT": ["R22.1", "F1.1", "J5.2", "TP3.1", "U8.9", "U8.8"],
+    "VBAT": ["R22.1", "F1.1", "J5.2", "TP3.1", "U8.9", "U8.8", "F2.1"],
+    # rev C boost
+    "VBAT_B": ["F2.2", "L2.1", "C30.1", "C31.2", "U10.9", "C32.1", "R35.2"],
+    "SW2": ["L2.2", "U10.4", "U10.5", "U10.6", "U10.7", "C34.2", "R30.2"],
+    "BST_BOOT": ["U10.8", "C34.1"],
+    "BST_FSW": ["U10.3", "R30.1"],
+    "BST_VCC": ["U10.1", "C33.1"],
+    "BST_EN": ["U10.2", "R35.1", "R36.2"],
+    "BST_SS": ["U10.10", "C35.1"],
+    "BST_FB": ["U10.17", "R32.2", "R33.1"],
+    "BST_COMP": ["U10.18", "R34.1"],
+    "BST_COMPRC": ["R34.2", "C36.1"],
+    "BST_ILIM": ["U10.19", "R31.1"],
+    "VIN12": ["U10.14", "U10.15", "U10.16", "C37.1", "C38.1", "C39.1", "R32.1",
+              "J1.57", "J1.59", "TP7.1"],
     "Q2_G": ["Q2.4", "R11.1"],
     "VBAT_F": ["F1.2", "U3.3", "C6.1", "C7.1", "C8.1"],
     "SW": ["U3.5", "L1.1", "C9.2"],
@@ -344,8 +457,8 @@ NETS = {
     "SS": ["U3.7", "C10.1"],
     "FB": ["U3.8", "R12.2", "R13.1"],
     # rev B sensors
-    "IMU_INT1": ["U7.4", "J2.37"],
-    "INA_ALERT": ["U8.3", "J2.41", "R29.1"],
+    "IMU_INT1": ["U7.4", "J2.3"],
+    "INA_ALERT": ["U8.3", "J2.9", "R29.1"],
     "TOUCH": ["U9.1", "U2.9"],
     "TOUCH_SNS": ["U9.3", "R24.2", "C24.1"],
     "TOUCH_PAD": ["J9.1", "R24.1"],
@@ -367,7 +480,8 @@ NC = (["U3.1", "U3.2", "U4.2"]                       # RT float = 500 kHz, EN fl
       + _p("U2", 10, 11, 13, 14, 15, 16, 17, 18, 19, 20)
       # LSM6DSV16X INT2 unused; OCS_Aux and SDO_Aux may be left open when the
       # auxiliary SPI is unused (DS13510 Table 2 note 3)
-      + _p("U7", 9, 10, 11))
+      + _p("U7", 9, 10, 11)
+      + ["U10.13"])                                     # MODE floating = PFM at light load
 
 
 def all_pins():

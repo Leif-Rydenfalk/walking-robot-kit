@@ -1,0 +1,373 @@
+{
+ "bond": {
+  "GND": [
+   109,
+   [
+    [
+     "J3",
+     "10",
+     "no legal via within 1.50 mm"
+    ],
+    [
+     "J3",
+     "13",
+     "no legal via within 1.50 mm"
+    ],
+    [
+     "J3",
+     "4",
+     "no legal via within 1.50 mm"
+    ],
+    [
+     "J3",
+     "7",
+     "no legal via within 1.50 mm"
+    ],
+    [
+     "U8",
+     "7",
+     "no legal via within 1.50 mm"
+    ]
+   ]
+  ],
+  "GND-wide": [
+   16,
+   []
+  ],
+  "V5": [
+   8,
+   []
+  ],
+  "VBAT": [
+   5,
+   [
+    [
+     "U8",
+     "8",
+     "no legal via within 1.50 mm"
+    ],
+    [
+     "U8",
+     "9",
+     "no legal via within 1.50 mm"
+    ]
+   ]
+  ],
+  "VBAT-wide": [
+   2,
+   []
+  ]
+ },
+ "csi0_copied": {
+  "arcs": 0,
+  "segments": 530,
+  "vias": 10
+ },
+ "drc": {
+  "$schema": "https://schemas.kicad.org/drc.v1.json",
+  "coordinate_units": "mm",
+  "date": "2026-10-10T22:43:15",
+  "ignored_checks": [
+   {
+    "description": "Footprint has no courtyard defined",
+    "key": "missing_courtyard"
+   },
+   {
+    "description": "Track endpoint not centered on via",
+    "key": "track_not_centered_on_via"
+   },
+   {
+    "description": "Tuning profile track geometries",
+    "key": "tuning_profile_track_geometries"
+   },
+   {
+    "description": "Footprint doesn't match symbol's footprint filters",
+    "key": "footprint_filters_mismatch"
+   },
+   {
+    "description": "Footprint component type doesn't match footprint pads",
+    "key": "footprint_type_mismatch"
+   }
+  ],
+  "included_severities": [
+   "error",
+   "warning",
+   "exclusion"
+  ],
+  "kicad_version": "10.0.6",
+  "schematic_parity": [],
+  "source": "unoq_hat.kicad_pcb",
+  "unconnected_items": [],
+  "violations": []
+ },
+ "drc_error": null,
+ "islands": [
+  [
+   [
+    [
+     58.4,
+     10.2
+    ],
+    [
+     54.5,
+     18.0
+    ]
+   ],
+   [
+    [
+     58.1,
+     20.02
+    ]
+   ]
+  ],
+  [
+   [
+    [
+     36.1,
+     12.6
+    ],
+    [
+     13.7,
+     44.6
+    ]
+   ],
+   []
+  ]
+ ],
+ "layers": 4,
+ "name": "unoq_hat",
+ "nets": 75,
+ "open_joins": [],
+ "parts": 109,
+ "pruned": [
+  [
+   "CCI_SCL",
+   [
+    33.35,
+    40.987500000000004
+   ],
+   [
+    32.325,
+    40.987500000000004
+   ],
+   "B.Cu"
+  ],
+  [
+   "IMU_INT1",
+   [
+    25.015,
+    30.750000000000004
+   ],
+   [
+    24.4025,
+    30.750000000000004
+   ],
+   "B.Cu"
+  ],
+  [
+   "+3V3",
+   [
+    26.6775,
+    29.087500000000002
+   ],
+   [
+    26.6775,
+    28.475000000000005
+   ],
+   "B.Cu"
+  ],
+  [
+   "+3V3",
+   [
+    25.015,
+    29.250000000000004
+   ],
+   [
+    24.4025,
+    29.250000000000004
+   ],
+   "B.Cu"
+  ],
+  [
+   "U1_OE",
+   [
+    33.4,
+    14.167500000000004
+   ],
+   [
+    34.325,
+    14.167500000000004
+   ],
+   "B.Cu"
+  ],
+  [
+   "CCI_SCL_1V8",
+   [
+    33.4,
+    14.667500000000004
+   ],
+   [
+    34.325,
+    14.667500000000004
+   ],
+   "B.Cu"
+  ],
+  [
+   "CCI_SDA",
+   [
+    30.6,
+    13.167500000000004
+   ],
+   [
+    29.675,
+    13.167500000000004
+   ],
+   "B.Cu"
+  ],
+  [
+   "SS",
+   [
+    52.26,
+    29.337500000000002
+   ],
+   [
+    51.625,
+    29.337500000000002
+   ],
+   "B.Cu"
+  ],
+  [
+   "CCI_SCL",
+   [
+    26.1775,
+    29.087500000000002
+   ],
+   [
+    26.1775,
+    29.780000000000005
+   ],
+   "B.Cu"
+  ]
+ ],
+ "rotations": {
+  "J1": 270,
+  "J2": 270,
+  "J3": 180
+ },
+ "routed_rows": 7,
+ "seconds": 106.7,
+ "silk_refs_hidden": [
+  "C12",
+  "C15",
+  "C3",
+  "D1",
+  "R12",
+  "R14",
+  "R15",
+  "R16",
+  "R17",
+  "R20",
+  "R21",
+  "R25",
+  "R26",
+  "R3",
+  "R33",
+  "R35",
+  "R36",
+  "R5",
+  "R6",
+  "TP6",
+  "U1",
+  "U10",
+  "U5",
+  "U6"
+ ],
+ "silk_refs_placed": [
+  "C1",
+  "C10",
+  "C11",
+  "C13",
+  "C14",
+  "C16",
+  "C19",
+  "C2",
+  "C20",
+  "C21",
+  "C22",
+  "C23",
+  "C24",
+  "C25",
+  "C26",
+  "C30",
+  "C31",
+  "C32",
+  "C33",
+  "C34",
+  "C35",
+  "C36",
+  "C37",
+  "C38",
+  "C39",
+  "C4",
+  "C5",
+  "C6",
+  "C7",
+  "C8",
+  "C9",
+  "D40",
+  "F1",
+  "F2",
+  "H2",
+  "H3",
+  "H4",
+  "J1",
+  "J10",
+  "J11",
+  "J12",
+  "J2",
+  "J3",
+  "J4",
+  "J5",
+  "J6",
+  "J7",
+  "J8",
+  "J9",
+  "JP1",
+  "L1",
+  "L2",
+  "Q1",
+  "Q2",
+  "R1",
+  "R11",
+  "R13",
+  "R18",
+  "R19",
+  "R2",
+  "R22",
+  "R24",
+  "R27",
+  "R28",
+  "R29",
+  "R30",
+  "R31",
+  "R32",
+  "R34",
+  "R4",
+  "R7",
+  "R8",
+  "R9",
+  "TP1",
+  "TP2",
+  "TP3",
+  "TP4",
+  "TP5",
+  "TP7",
+  "U2",
+  "U3",
+  "U4",
+  "U7",
+  "U8",
+  "U9"
+ ],
+ "stitch": 72
+}

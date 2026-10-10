@@ -1,7 +1,10 @@
 (version 1)
 # JLCPCB 4-layer 1 oz limits, jlcpcb.com/capabilities/pcb-capabilities read 2026-10-03
-(rule jlc_track (constraint track_width (min 0.09mm)))
-(rule jlc_clear (constraint clearance (min 0.09mm)))
+# Only rules that are STRICTER than the board's own 0.127 mm track/clearance stay here.
+# A (min 0.09mm) clearance rule here replaces the 0.127 the zones are filled with:
+# build #8 (2026-10-10) filled GND 0.09 mm from the JMEDIA pads, inside their 0.1 mm
+# mask openings, and DRC found 83 solder_mask_bridge errors. JLC's 0.09 mm track/space
+# floor is checked by the board rules (0.127 >= 0.09), not by a rule here.
 (rule jlc_pad_pad (constraint clearance (min 0.15mm)) (condition "A.Type == 'Pad' && B.Type == 'Pad' && A.Net != B.Net"))
 (rule jlc_via_hole (constraint hole_size (min 0.15mm)) (condition "A.Type == 'Via'"))
 (rule jlc_via_dia (constraint via_diameter (min 0.25mm)))

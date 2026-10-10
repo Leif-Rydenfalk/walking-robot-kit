@@ -21,11 +21,14 @@ GROUP = {
 for r in ("J4", "R3", "R4", "R5", "R6", "R7", "R8"):
     GROUP[r] = "tof"
 for r in ("J5", "U5", "U6", "Q1", "JP1", "R15", "R16", "R17", "R18", "R19", "R20",
-          "R21", "D1", "C20", "C21", "TP4"):
+          "R21", "D1", "D40", "C20", "C21", "TP4"):
     GROUP[r] = "servo bus"
 for r in ("J6", "Q2", "R11", "F1", "U3", "C6", "C7", "C8", "C9", "C10", "R12", "R13",
           "L1", "C11", "C12", "TP2", "TP3", "TP5"):
     GROUP[r] = "power"
+for r in ("U10", "L2", "F2", "C30", "C31", "C32", "C33", "C34", "C35", "C36", "C37",
+          "C38", "C39", "R30", "R31", "R32", "R33", "R34", "R35", "R36", "TP7"):
+    GROUP[r] = "uno q vin boost"
 for r in ("U4", "R9", "C13", "C14", "C15", "C16", "J7", "J8", "R14", "C19"):
     GROUP[r] = "audio"
 for r in ("U7", "C22", "C23", "R27", "R28", "J12"):
@@ -35,7 +38,7 @@ for r in ("U8", "R22", "C26", "R29"):
 for r in ("U9", "J9", "R24", "C24", "C25", "J10", "J11", "R25", "R26"):
     GROUP[r] = "touch and feet"
 
-s = Schematic("unoq_hat", title="the robot UNO Q head hat", rev="B",
+s = Schematic("unoq_hat", title="the robot UNO Q head hat", rev="C",
               company="this project / the robot")
 # symbols KiCad 10 does not have, each with the datasheet its pinout was read from
 for name, spec in H.LOCAL_SYMBOLS.items():
@@ -46,7 +49,8 @@ for ref, sym, fp, val, lcsc, side, at, rot, fitted, note in H.PARTS:
     fields = {"LCSC Part #": lcsc} if lcsc else {}
     s.part(ref, sym, value=val, footprint=fp, group=GROUP.get(ref, "misc"),
            dnp=not fitted, in_bom=not nobom, fields=fields, note=note)
-s.power("GND", "+3V3", "+1V8", "V5", "VBAT", "VBAT_IN", "VBAT_FET", "VBAT_F")
+s.power("GND", "+3V3", "+1V8", "V5", "VBAT", "VBAT_IN", "VBAT_FET", "VBAT_F",
+        "VIN12", "VBAT_B")
 for net, pins in H.NETS.items():
     s.net(net, *pins)
 s.nc(*H.NC)
@@ -55,7 +59,9 @@ print("no-connect, unused UNO Q signals (%d):" % len(unused))
 print("  " + ", ".join(k for k, _ in unused))
 s.text("UNO Q head hat rev B. Board-to-board pinout and the camera block copied from "
        "Arduino's UNO Media Carrier ASX00083 so arduino-linux-config camera0=type1-2lanes "
-       "applies. 2S pack -> 5 mOhm shunt -> AON6407 -> PTC -> TPS62933 5 V -> JMISC 5V_SYS. "
+       "applies. 2S pack -> 5 mOhm shunt -> AON6407. PTC F2 -> TPS61088 11.9 V -> JMEDIA 57/59 "
+       "VIN (UNO Q's own buck). PTC F1 -> TPS62933 5 V -> amplifier only; JMISC 54/56 open. "
+       "Interrupts on 3.3 V MCU pins J2.3/7/9. D40 keeps the servo pull-ups off +3V3. "
        "One 3.3 V I2C bus (CCI0) carries camera 0x10, expander 0x26, ToF 0x29, "
        "INA226 0x40, head IMU 0x6B and, on J12, the trunk IMU 0x6A.")
 s.place()
