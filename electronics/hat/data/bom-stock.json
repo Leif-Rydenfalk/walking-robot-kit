@@ -1,6 +1,6 @@
 {
  "boards": 5,
- "fetched_utc": "2026-10-10T14:53:22Z",
+ "fetched_utc": "2026-10-10T21:03:33Z",
  "rows": [
   {
    "lcsc": "C191721",
@@ -20,7 +20,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/3aedae07ef21d25ca8d950ab4b2f9895.pdf?productCode=C191721",
    "jlc_stock": 782,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:39Z",
+   "fetched_utc": "2026-10-10T21:02:52Z",
    "ok": true
   },
   {
@@ -35,12 +35,12 @@
    "mpn": "TF31-22S-0.5SH(800)",
    "brand": "HRS",
    "package": "SMD,P=0.5mm,Surface Mount,Right Angle",
-   "lcsc_stock": 1043,
+   "lcsc_stock": 1044,
    "lcsc_usd_10": 0.3973,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/1f4b27665a7c1a8cc6f29d17b6cec7db.pdf?productCode=C3169786",
    "jlc_stock": 1065,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:40Z",
+   "fetched_utc": "2026-10-10T21:02:53Z",
    "ok": true
   },
   {
@@ -55,12 +55,12 @@
    "mpn": "TCA9406DCUR",
    "brand": "TI",
    "package": "VSSOP-8-0.5mm",
-   "lcsc_stock": 16422,
+   "lcsc_stock": 16412,
    "lcsc_usd_10": 0.6883,
    "datasheet": "https://www.ti.com/cn/lit/ds/symlink/tca9406.pdf",
    "jlc_stock": 16529,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:41Z",
+   "fetched_utc": "2026-10-10T21:02:54Z",
    "ok": true
   },
   {
@@ -88,9 +88,9 @@
    "lcsc_stock": 0,
    "lcsc_usd_10": 0.0034,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25744",
-   "jlc_stock": 19792653,
+   "jlc_stock": 19787752,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:52:42Z",
+   "fetched_utc": "2026-10-10T21:02:55Z",
    "ok": true
   },
   {
@@ -105,12 +105,12 @@
    "mpn": "CL05A475MP5NRNC",
    "brand": "Samsung Electro-Mechanics",
    "package": "0402",
-   "lcsc_stock": 0,
+   "lcsc_stock": 992750,
    "lcsc_usd_10": 0.0167,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C23733",
-   "jlc_stock": 2106090,
+   "jlc_stock": 2105890,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:52:42Z",
+   "fetched_utc": "2026-10-10T21:02:56Z",
    "ok": true
   },
   {
@@ -137,12 +137,12 @@
    "mpn": "CL05B104KO5NNNC",
    "brand": "Samsung Electro-Mechanics",
    "package": "0402",
-   "lcsc_stock": 6149000,
+   "lcsc_stock": 6032000,
    "lcsc_usd_10": 0.0046,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C1525",
-   "jlc_stock": 24120121,
+   "jlc_stock": 24115321,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:52:43Z",
+   "fetched_utc": "2026-10-10T21:02:56Z",
    "ok": true
   },
   {
@@ -157,12 +157,12 @@
    "mpn": "TCA9555PWR",
    "brand": "TI",
    "package": "TSSOP-24",
-   "lcsc_stock": 37624,
+   "lcsc_stock": 37613,
    "lcsc_usd_10": 0.5939,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/b87b1e8b19259fa8f353ae4a0dd9a62d.pdf?productCode=C465732",
-   "jlc_stock": 38410,
+   "jlc_stock": 38408,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:44Z",
+   "fetched_utc": "2026-10-10T21:02:57Z",
    "ok": true
   },
   {
@@ -181,9 +181,9 @@
    "lcsc_stock": 0,
    "lcsc_usd_10": 0.0883,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C1713",
-   "jlc_stock": 325605,
+   "jlc_stock": 325371,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:44Z",
+   "fetched_utc": "2026-10-10T21:02:58Z",
    "ok": true
   },
   {
@@ -198,12 +198,12 @@
    "mpn": "BM06B-SRSS-TB(LF)(SN)",
    "brand": "JST",
    "package": "SMD,P=1mm",
-   "lcsc_stock": 13935,
+   "lcsc_stock": 14105,
    "lcsc_usd_10": 0.349,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/e03a82bcc66e3c3589917313e54d45e2.pdf?productCode=C160392",
-   "jlc_stock": 30892,
+   "jlc_stock": 30877,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:45Z",
+   "fetched_utc": "2026-10-10T21:02:59Z",
    "ok": true
   },
   {
@@ -222,9 +222,9 @@
    "lcsc_stock": 0,
    "lcsc_usd_10": 0.0025,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C17168",
-   "jlc_stock": 8049350,
+   "jlc_stock": 8049052,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:52:46Z",
+   "fetched_utc": "2026-10-10T21:03:00Z",
    "ok": true
   },
   {
@@ -242,12 +242,12 @@
    "mpn": "SM02B-SRSS-TB(LF)(SN)",
    "brand": "JST",
    "package": "SMD,P=1mm,Surface Mount,Right Angle",
-   "lcsc_stock": 27275,
+   "lcsc_stock": 27255,
    "lcsc_usd_10": 0.1333,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/40c649e22fa9bda892cfec952005fd51.pdf?productCode=C160402",
-   "jlc_stock": 27276,
+   "jlc_stock": 27257,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:47Z",
+   "fetched_utc": "2026-10-10T21:03:00Z",
    "ok": true
   },
   {
@@ -265,9 +265,9 @@
    "lcsc_stock": 0,
    "lcsc_usd_10": 0.0018,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25879",
-   "jlc_stock": 1608192,
+   "jlc_stock": 1606911,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:52:47Z",
+   "fetched_utc": "2026-10-10T21:03:01Z",
    "ok": true
   },
   {
@@ -282,12 +282,12 @@
    "mpn": "SN74LVC1G126DBVR",
    "brand": "TI",
    "package": "SOT-23-5",
-   "lcsc_stock": 64080,
+   "lcsc_stock": 63550,
    "lcsc_usd_10": 0.0755,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/3d79861610d54464b4b035cabb370158.pdf?productCode=C7834",
-   "jlc_stock": 64125,
+   "jlc_stock": 64139,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:48Z",
+   "fetched_utc": "2026-10-10T21:03:02Z",
    "ok": true
   },
   {
@@ -302,12 +302,12 @@
    "mpn": "SN74LVC1G125DBVR",
    "brand": "TI",
    "package": "SOT-23-5",
-   "lcsc_stock": 60370,
+   "lcsc_stock": 60380,
    "lcsc_usd_10": 0.0753,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/397db609d8c243daaad8f1a233af4e5d.pdf?productCode=C23654",
-   "jlc_stock": 60370,
+   "jlc_stock": 60384,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:49Z",
+   "fetched_utc": "2026-10-10T21:03:03Z",
    "ok": true
   },
   {
@@ -322,12 +322,12 @@
    "mpn": "MMBT3906",
    "brand": "TWGMC",
    "package": "SOT-23",
-   "lcsc_stock": 384050,
+   "lcsc_stock": 383650,
    "lcsc_usd_10": 0.0073,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/5fb8abfb58de49a9e93c5a14c4951afe.pdf?productCode=C727128",
-   "jlc_stock": 384069,
+   "jlc_stock": 383664,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:50Z",
+   "fetched_utc": "2026-10-10T21:03:04Z",
    "ok": true
   },
   {
@@ -342,12 +342,12 @@
    "mpn": "0402WGF2002TCE",
    "brand": "UNI-ROYAL",
    "package": "0402",
-   "lcsc_stock": 983300,
+   "lcsc_stock": 979500,
    "lcsc_usd_10": 0.0013,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25765",
-   "jlc_stock": 2660305,
+   "jlc_stock": 2661288,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:52:50Z",
+   "fetched_utc": "2026-10-10T21:03:05Z",
    "ok": true
   },
   {
@@ -365,9 +365,9 @@
    "lcsc_stock": 6941700,
    "lcsc_usd_10": 0.0036,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/b426be3ce22c6de3e0c3a2248e49159e.pdf?productCode=C138002",
-   "jlc_stock": 7301498,
+   "jlc_stock": 7301324,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:51Z",
+   "fetched_utc": "2026-10-10T21:03:05Z",
    "ok": true
   },
   {
@@ -383,12 +383,12 @@
    "mpn": "RC0402FR-071KL",
    "brand": "YAGEO",
    "package": "0402",
-   "lcsc_stock": 991400,
+   "lcsc_stock": 1030200,
    "lcsc_usd_10": 0.0038,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/b426be3ce22c6de3e0c3a2248e49159e.pdf?productCode=C106235",
-   "jlc_stock": 1985137,
+   "jlc_stock": 2016284,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:52Z",
+   "fetched_utc": "2026-10-10T21:03:06Z",
    "ok": true
   },
   {
@@ -403,12 +403,12 @@
    "mpn": "BZT52C5V1S-7-F",
    "brand": "DIODES",
    "package": "SOD-323",
-   "lcsc_stock": 68320,
+   "lcsc_stock": 68180,
    "lcsc_usd_10": 0.0355,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/e91584fb3d2d85e136baa2628fef5f07.pdf?productCode=C151348",
-   "jlc_stock": 68341,
+   "jlc_stock": 68335,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:53Z",
+   "fetched_utc": "2026-10-10T21:03:07Z",
    "ok": true
   },
   {
@@ -423,12 +423,12 @@
    "mpn": "BAT54H,115",
    "brand": "Nexperia",
    "package": "SOD-123F",
-   "lcsc_stock": 7870,
+   "lcsc_stock": 7885,
    "lcsc_usd_10": 0.1452,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/5d452729b69b0536541be9ab4ef736d3.pdf?productCode=C426769",
    "jlc_stock": 7930,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:53Z",
+   "fetched_utc": "2026-10-10T21:03:08Z",
    "ok": true
   },
   {
@@ -443,12 +443,12 @@
    "mpn": "S6B-PH-SM4-TB(LF)(SN)",
    "brand": "JST",
    "package": "SMD,P=2mm,Surface Mount,Right Angle",
-   "lcsc_stock": 5128,
+   "lcsc_stock": 5096,
    "lcsc_usd_10": 0.3185,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/fd6b0599884a99953f02d32fdcec9311.pdf?productCode=C265405",
-   "jlc_stock": 5128,
+   "jlc_stock": 5096,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:54Z",
+   "fetched_utc": "2026-10-10T21:03:09Z",
    "ok": true
   },
   {
@@ -468,7 +468,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0934e1c0e13d4ba28c7432f63cfc1997.pdf?productCode=C13899",
    "jlc_stock": 8327,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:55Z",
+   "fetched_utc": "2026-10-10T21:03:10Z",
    "ok": true
   },
   {
@@ -487,12 +487,12 @@
    "mpn": "0402WGF1003TCE",
    "brand": "UNI-ROYAL",
    "package": "0402",
-   "lcsc_stock": 1401300,
+   "lcsc_stock": 1400600,
    "lcsc_usd_10": 0.0025,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25741",
-   "jlc_stock": 8079029,
+   "jlc_stock": 8085679,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:52:55Z",
+   "fetched_utc": "2026-10-10T21:03:10Z",
    "ok": true
   },
   {
@@ -512,7 +512,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/cfa74b12b2251ef3c7fa909bdad1e8a9.pdf?productCode=C702820",
    "jlc_stock": 9061,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:56Z",
+   "fetched_utc": "2026-10-10T21:03:11Z",
    "ok": true
   },
   {
@@ -527,12 +527,12 @@
    "mpn": "TPS62933DRLR",
    "brand": "TI",
    "package": "SOT-583",
-   "lcsc_stock": 32215,
+   "lcsc_stock": 30593,
    "lcsc_usd_10": 0.4882,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/8822d9443d3405e5b17304ebbb56ac2c.pdf?productCode=C3200405",
-   "jlc_stock": 32514,
+   "jlc_stock": 32491,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:57Z",
+   "fetched_utc": "2026-10-10T21:03:12Z",
    "ok": true
   },
   {
@@ -548,12 +548,12 @@
    "mpn": "GRM31CR61E106KA12L",
    "brand": "muRata",
    "package": "1206",
-   "lcsc_stock": 14485,
+   "lcsc_stock": 12070,
    "lcsc_usd_10": 0.1677,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/5d6d0805a03309170176423d23331af1.pdf?productCode=C77090",
    "jlc_stock": 18153,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:58Z",
+   "fetched_utc": "2026-10-10T21:03:13Z",
    "ok": true
   },
   {
@@ -571,12 +571,12 @@
    "mpn": "CC0402KRX7R8BB104",
    "brand": "YAGEO",
    "package": "0402",
-   "lcsc_stock": 1484700,
+   "lcsc_stock": 1597100,
    "lcsc_usd_10": 0.0073,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/23ccee80ee542e7cf156a772bb589942.pdf?productCode=C105883",
-   "jlc_stock": 2066779,
+   "jlc_stock": 2106739,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:58Z",
+   "fetched_utc": "2026-10-10T21:03:14Z",
    "ok": true
   },
   {
@@ -591,12 +591,12 @@
    "mpn": "CC0402KRX7R9BB103",
    "brand": "YAGEO",
    "package": "0402",
-   "lcsc_stock": 6376200,
+   "lcsc_stock": 6589800,
    "lcsc_usd_10": 0.0042,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/23ccee80ee542e7cf156a772bb589942.pdf?productCode=C60133",
-   "jlc_stock": 6705064,
+   "jlc_stock": 6919092,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:52:59Z",
+   "fetched_utc": "2026-10-10T21:03:15Z",
    "ok": true
   },
   {
@@ -616,7 +616,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C27011",
    "jlc_stock": 6161,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:00Z",
+   "fetched_utc": "2026-10-10T21:03:15Z",
    "ok": true
   },
   {
@@ -631,12 +631,12 @@
    "mpn": "FNR6045S6R8MT",
    "brand": "cjiang",
    "package": "SMD,6x6mm",
-   "lcsc_stock": 640,
+   "lcsc_stock": 650,
    "lcsc_usd_10": 0.113,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/a0b12ba9dfe6b9e66b6bb852b7c71c03.pdf?productCode=C168072",
-   "jlc_stock": 594,
+   "jlc_stock": 650,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:01Z",
+   "fetched_utc": "2026-10-10T21:03:16Z",
    "ok": true
   },
   {
@@ -657,12 +657,12 @@
    "mpn": "CL32A226KAJNNNE",
    "brand": "Samsung Electro-Mechanics",
    "package": "1210",
-   "lcsc_stock": 216762,
+   "lcsc_stock": 220532,
    "lcsc_usd_10": 0.1634,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C52306",
-   "jlc_stock": 278884,
+   "jlc_stock": 278940,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:01Z",
+   "fetched_utc": "2026-10-10T21:03:17Z",
    "ok": true
   },
   {
@@ -680,9 +680,9 @@
    "lcsc_stock": 865,
    "lcsc_usd_10": 0.2826,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/6c6fce4367275d84ec6a99bf09f1250f.pdf?productCode=C265101",
-   "jlc_stock": 869,
+   "jlc_stock": 867,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:02Z",
+   "fetched_utc": "2026-10-10T21:03:18Z",
    "ok": true
   },
   {
@@ -697,12 +697,12 @@
    "mpn": "PAM8302AASCR",
    "brand": "DIODES",
    "package": "MSOP-8",
-   "lcsc_stock": 13270,
+   "lcsc_stock": 13250,
    "lcsc_usd_10": 0.322,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/f2301bec36461d1ce751d45a4a680a5d.pdf?productCode=C113367",
-   "jlc_stock": 13274,
+   "jlc_stock": 13250,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:07Z",
+   "fetched_utc": "2026-10-10T21:03:19Z",
    "ok": true
   },
   {
@@ -717,12 +717,12 @@
    "mpn": "S2B-PH-SM4-TB(LF)(SN)",
    "brand": "JST",
    "package": "SMD,P=2mm,Surface Mount,Right Angle",
-   "lcsc_stock": 14360,
+   "lcsc_stock": 15275,
    "lcsc_usd_10": 0.2387,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/2474e9261ed7c5f86b55d373e724589d.pdf?productCode=C295747",
-   "jlc_stock": 14361,
+   "jlc_stock": 15277,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:09Z",
+   "fetched_utc": "2026-10-10T21:03:19Z",
    "ok": true
   },
   {
@@ -737,12 +737,12 @@
    "mpn": "LSM6DSV16XTR",
    "brand": "ST",
    "package": "LGA-14(2.5x3)",
-   "lcsc_stock": 7329,
+   "lcsc_stock": 7121,
    "lcsc_usd_10": 2.9938,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/7d66556bb254f99e058243c7371e051d.pdf?productCode=C5267406",
-   "jlc_stock": 7635,
+   "jlc_stock": 7588,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:09Z",
+   "fetched_utc": "2026-10-10T21:03:20Z",
    "ok": true
   },
   {
@@ -758,12 +758,12 @@
    "mpn": "0402WGF4701TCE",
    "brand": "UNI-ROYAL",
    "package": "0402",
-   "lcsc_stock": 7330600,
+   "lcsc_stock": 7340200,
    "lcsc_usd_10": 0.0027,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25900",
-   "jlc_stock": 14601189,
+   "jlc_stock": 14597579,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:53:10Z",
+   "fetched_utc": "2026-10-10T21:03:21Z",
    "ok": true
   },
   {
@@ -778,12 +778,12 @@
    "mpn": "BM04B-SRSS-TB(LF)(SN)",
    "brand": "JST",
    "package": "SMD,P=1mm",
-   "lcsc_stock": 22270,
+   "lcsc_stock": 22220,
    "lcsc_usd_10": 0.2559,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/00659630c8ad1e2184fc3218d8262faf.pdf?productCode=C160390",
-   "jlc_stock": 25177,
+   "jlc_stock": 25132,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:11Z",
+   "fetched_utc": "2026-10-10T21:03:22Z",
    "ok": true
   },
   {
@@ -803,7 +803,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/f42cc89de166d1a84d9a917c44512826.pdf?productCode=C185817",
    "jlc_stock": 89469,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:12Z",
+   "fetched_utc": "2026-10-10T21:03:23Z",
    "ok": true
   },
   {
@@ -818,12 +818,12 @@
    "mpn": "INA226AIDGSR",
    "brand": "TI",
    "package": "VSSOP-10",
-   "lcsc_stock": 48589,
+   "lcsc_stock": 47825,
    "lcsc_usd_10": 0.638,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/c67b965eb2a01e8d671b6f15d639e314.pdf?productCode=C49851",
-   "jlc_stock": 53150,
+   "jlc_stock": 53086,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:12Z",
+   "fetched_utc": "2026-10-10T21:03:23Z",
    "ok": true
   },
   {
@@ -843,7 +843,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/6f5612c685ffeaea62cc8564d21239f1.pdf?productCode=C2890349",
    "jlc_stock": 8576,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:13Z",
+   "fetched_utc": "2026-10-10T21:03:24Z",
    "ok": true
   },
   {
@@ -858,12 +858,12 @@
    "mpn": "TPS61088RHLR",
    "brand": "TI",
    "package": "VQFN-20-EP(3.6x4.6)",
-   "lcsc_stock": 2774,
+   "lcsc_stock": 2602,
    "lcsc_usd_10": 1.0391,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/7466a2af04454f0896e70eb827692387.pdf?productCode=C87357",
-   "jlc_stock": 4093,
+   "jlc_stock": 4090,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:14Z",
+   "fetched_utc": "2026-10-10T21:03:25Z",
    "ok": true
   },
   {
@@ -883,7 +883,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/40dfb6cb4606b2ccaa4e89438a42f563.pdf?productCode=C167218",
    "jlc_stock": 62964,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:15Z",
+   "fetched_utc": "2026-10-10T21:03:26Z",
    "ok": true
   },
   {
@@ -898,12 +898,12 @@
    "mpn": "JK-MSMD500L-12V",
    "brand": "Jinrui",
    "package": "1812",
-   "lcsc_stock": 4380,
+   "lcsc_stock": 4385,
    "lcsc_usd_10": 0.2127,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/4b6c851584ad23fd00938c1a71f72301.pdf?productCode=C2844238",
    "jlc_stock": 4501,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:15Z",
+   "fetched_utc": "2026-10-10T21:03:26Z",
    "ok": true
   },
   {
@@ -918,12 +918,12 @@
    "mpn": "CL10A475KO8NNNC",
    "brand": "Samsung Electro-Mechanics",
    "package": "0603",
-   "lcsc_stock": 0,
+   "lcsc_stock": 77490,
    "lcsc_usd_10": 0.0298,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C19666",
-   "jlc_stock": 2208363,
+   "jlc_stock": 2212841,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:53:16Z",
+   "fetched_utc": "2026-10-10T21:03:27Z",
    "ok": true
   },
   {
@@ -941,9 +941,9 @@
    "lcsc_stock": 215700,
    "lcsc_usd_10": 0.006,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/09fe2daf22580a99fa7fea93ccb20fb7.pdf?productCode=C82219",
-   "jlc_stock": 215795,
+   "jlc_stock": 215768,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:17Z",
+   "fetched_utc": "2026-10-10T21:03:28Z",
    "ok": true
   },
   {
@@ -961,9 +961,9 @@
    "lcsc_stock": 0,
    "lcsc_usd_10": 0.0019,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25774",
-   "jlc_stock": 207852,
+   "jlc_stock": 210240,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:17Z",
+   "fetched_utc": "2026-10-10T21:03:29Z",
    "ok": true
   },
   {
@@ -978,12 +978,12 @@
    "mpn": "0402WGF1503TCE",
    "brand": "UNI-ROYAL",
    "package": "0402",
-   "lcsc_stock": 106500,
+   "lcsc_stock": 106600,
    "lcsc_usd_10": 0.0014,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25755",
-   "jlc_stock": 257307,
+   "jlc_stock": 257327,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:18Z",
+   "fetched_utc": "2026-10-10T21:03:30Z",
    "ok": true
   },
   {
@@ -998,12 +998,12 @@
    "mpn": "0402WGF1004TCE",
    "brand": "UNI-ROYAL",
    "package": "0402",
-   "lcsc_stock": 447700,
+   "lcsc_stock": 411900,
    "lcsc_usd_10": 0.0026,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C26083",
-   "jlc_stock": 2223863,
+   "jlc_stock": 2223764,
    "jlc_library": "base",
-   "fetched_utc": "2026-10-10T14:53:19Z",
+   "fetched_utc": "2026-10-10T21:03:30Z",
    "ok": true
   },
   {
@@ -1023,7 +1023,7 @@
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25746",
    "jlc_stock": 52263,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:20Z",
+   "fetched_utc": "2026-10-10T21:03:31Z",
    "ok": true
   },
   {
@@ -1038,12 +1038,12 @@
    "mpn": "0402WGF1802TCE",
    "brand": "UNI-ROYAL",
    "package": "0402",
-   "lcsc_stock": 331300,
+   "lcsc_stock": 335200,
    "lcsc_usd_10": 0.0014,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25762",
-   "jlc_stock": 483237,
+   "jlc_stock": 483177,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:20Z",
+   "fetched_utc": "2026-10-10T21:03:32Z",
    "ok": true
   },
   {
@@ -1058,12 +1058,12 @@
    "mpn": "0402B682K500NT",
    "brand": "FH",
    "package": "0402",
-   "lcsc_stock": 35100,
+   "lcsc_stock": 34600,
    "lcsc_usd_10": 0.0054,
    "datasheet": "https://datasheet.lcsc.com/datasheet/pdf/09fe2daf22580a99fa7fea93ccb20fb7.pdf?productCode=C1542",
-   "jlc_stock": 97625,
+   "jlc_stock": 97585,
    "jlc_library": "expand",
-   "fetched_utc": "2026-10-10T14:53:21Z",
+   "fetched_utc": "2026-10-10T21:03:33Z",
    "ok": true
   }
  ]
